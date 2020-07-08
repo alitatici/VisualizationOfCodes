@@ -5,9 +5,9 @@ from matplotlib import rc
 from Functions import newmark
 from scipy.integrate import odeint
 
-a=,
+a=","
 b="depremkaydi.csv"
-ag_txt = np.loadtxt(b, delimiter=) #units are in g
+ag_txt = np.loadtxt(b, delimiter=a) #units are in g
 groundacc=ag_txt[:,1]
 ags=groundacc.flatten("C")
 t_amount = len(ags)
