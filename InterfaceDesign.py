@@ -32,3 +32,4 @@ def Pencere() :
 
 Pencere()
 
+print("Ali")
