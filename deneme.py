@@ -35,6 +35,11 @@ class Ui_Form(object):
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
+    def a(self):
+        a=print("123")
+
+    def b(self):
+        b=print("321")
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
@@ -42,6 +47,9 @@ class Ui_Form(object):
         self.pushButton_2.setText(_translate("Form", "Clear"))
         self.pushButton_3.setText(_translate("Form", "Open"))
         self.pushButton.setText(_translate("Form", "Save"))
+
+        self.pushButton_2.clicked.connect(self.a)
+        self.pushButton_3.clicked.connect(self.b)
 
 
 if __name__ == "__main__":
