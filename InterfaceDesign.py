@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-print("Onur redesigned...")
-=======
 import sys
 from PyQt5 import QtWidgets, QtGui
 
@@ -36,4 +33,3 @@ def Pencere() :
 Pencere()
 
 print("Ali")
->>>>>>> Ali

@@ -49,6 +49,7 @@ class Ui_MainWindow(object):
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
+        self.pushButton.clicked.connect(self.on_click)
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -61,6 +62,9 @@ class Ui_MainWindow(object):
         self.comboBox.setItemText(2, _translate("MainWindow", "3"))
         self.pushButton.setText(_translate("MainWindow", "OK"))
 
+    def on_click(self):
+        text=self.lineEdit.text()
+        self.textEdit.setText(text)
     
 
 
