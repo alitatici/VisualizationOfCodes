@@ -45,19 +45,19 @@ class Ui_MainWindow(object):
             self.horizontalLayout_1.addWidget(self.lineEdit_1)
 
 
-            elif self.spinBox.value() == 2 :
-                self.horizontalLayoutWidget_2 = QtWidgets.QWidget(self.centralwidget)
-                self.horizontalLayoutWidget_2.setGeometry(QtCore.QRect(80, 20, 701, 22))
-                self.horizontalLayoutWidget_2.setObjectName("horizontalLayoutWidget_2")
-                self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget_2)
-                self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
-                self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-                self.lineEdit_2 = QtWidgets.QLineEdit(self.horizontalLayoutWidget_2)
-                self.lineEdit_2.setObjectName("lineEdit_2")
-                self.horizontalLayout_2.addWidget(self.lineEdit_2)
-                self.lineEdit_3 = QtWidgets.QLineEdit(self.horizontalLayoutWidget_2)
-                self.lineEdit_3.setObjectName("lineEdit_3")
-                self.horizontalLayout_2.addWidget(self.lineEdit_3)
+        elif self.spinBox.value() == 2 :
+            self.horizontalLayoutWidget_2 = QtWidgets.QWidget(self.centralwidget)
+            self.horizontalLayoutWidget_2.setGeometry(QtCore.QRect(80, 20, 701, 22))
+            self.horizontalLayoutWidget_2.setObjectName("horizontalLayoutWidget_2")
+            self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget_2)
+            self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
+            self.horizontalLayout_2.setObjectName("horizontalLayout_2")
+            self.lineEdit_2 = QtWidgets.QLineEdit(self.horizontalLayoutWidget_2)
+            self.lineEdit_2.setObjectName("lineEdit_2")
+            self.horizontalLayout_2.addWidget(self.lineEdit_2)
+            self.lineEdit_3 = QtWidgets.QLineEdit(self.horizontalLayoutWidget_2)
+            self.lineEdit_3.setObjectName("lineEdit_3")
+            self.horizontalLayout_2.addWidget(self.lineEdit_3)
         
 
         self.retranslateUi(MainWindow)
