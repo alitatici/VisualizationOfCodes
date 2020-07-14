@@ -19,3 +19,19 @@ sys.exit(Application.exec_()) #Çıkış yaparken uygulama ile ilgili tüm işle
 #---------------Create DataBase----------------#
 #----------------------------------------------#
 
+import sqlite3
+global curs
+global conn
+conn = sqlite3.connect("sDynaDB.db")
+curs=conn.cursor()
+queryCreTbl = ("Create Table If not exists sDyna (                  \
+                Floor INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,   \
+                Mass INTEGER NOT NULL,                              \
+                Rigidity INTEGER NOT NULL)")
+curs.execute(queryCreTbl)
+conn.commit()
+
+
+
+
+sys.exit(Application.exec_())

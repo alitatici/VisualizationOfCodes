@@ -40,6 +40,7 @@ class Ui_MainWindow(object):
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
+        
         self.spinBox.valueChanged.connect(self.spin_changed)
 
         self.retranslateUi(MainWindow)
