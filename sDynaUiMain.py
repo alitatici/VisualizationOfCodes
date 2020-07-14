@@ -24,10 +24,7 @@ global curs
 global conn
 conn = sqlite3.connect("sDynaDB.db")
 curs=conn.cursor()
-queryCreTbl = ("Create Table If not exists sDyna (                  \
-                Floor INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,   \
-                Mass INTEGER NOT NULL,                              \
-                Rigidity INTEGER NOT NULL)")
+queryCreTbl = "Create Table If not exists sDyna (Floor INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,Mass INTEGER NOT NULL,Rigidity INTEGER NOT NULL)"
 curs.execute(queryCreTbl)
 conn.commit()
 

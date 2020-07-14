@@ -1339,7 +1339,7 @@ ColorButton::disabled {
      <rect>
       <x>20</x>
       <y>200</y>
-      <width>131</width>
+      <width>141</width>
       <height>21</height>
      </rect>
     </property>
@@ -1350,7 +1350,7 @@ ColorButton::disabled {
    <widget class="QLabel" name="label_savedFloor">
     <property name="geometry">
      <rect>
-      <x>140</x>
+      <x>160</x>
       <y>200</y>
       <width>101</width>
       <height>21</height>
@@ -1379,7 +1379,7 @@ ColorButton::disabled {
       <x>20</x>
       <y>230</y>
       <width>631</width>
-      <height>62</height>
+      <height>65</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -1472,7 +1472,7 @@ ColorButton::disabled {
       <x>20</x>
       <y>10</y>
       <width>561</width>
-      <height>52</height>
+      <height>53</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout_2">
