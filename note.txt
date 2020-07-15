@@ -1,0 +1,5 @@
+1- Floor benzersiz olmalı. Fakat aynı katı değiştirmek isterken hata veriyor. DUZELT.
+    1.1-MASS ve RIGIDITY slotlarını boş bırakınca da hata veriyor.
+2- Floor seçilmeden önce MASS ve RIGIDITY slotlarını "enable(False)" yap.
+3- DeleteRow için tuş ekle
+    3.1- DeleteRow boş row seçilince program kapanıyor! DUZELT
