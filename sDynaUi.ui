@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>679</width>
-    <height>524</height>
+    <width>801</width>
+    <height>548</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -1282,8 +1282,8 @@ ColorButton::disabled {
      <rect>
       <x>20</x>
       <y>70</y>
-      <width>641</width>
-      <height>221</height>
+      <width>631</width>
+      <height>231</height>
      </rect>
     </property>
     <property name="rowCount">
@@ -1342,8 +1342,8 @@ ColorButton::disabled {
    <widget class="QLabel" name="label_6">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>300</y>
+      <x>20</x>
+      <y>310</y>
       <width>141</width>
       <height>21</height>
      </rect>
@@ -1355,8 +1355,8 @@ ColorButton::disabled {
    <widget class="QLabel" name="label_savedFloor">
     <property name="geometry">
      <rect>
-      <x>180</x>
-      <y>300</y>
+      <x>170</x>
+      <y>310</y>
       <width>101</width>
       <height>21</height>
      </rect>
@@ -1368,21 +1368,21 @@ ColorButton::disabled {
    <widget class="QPushButton" name="pb_Save">
     <property name="geometry">
      <rect>
-      <x>590</x>
-      <y>40</y>
-      <width>61</width>
-      <height>21</height>
+      <x>670</x>
+      <y>30</y>
+      <width>121</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="text">
-     <string>Save</string>
+     <string>SAVE</string>
     </property>
    </widget>
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>330</y>
+      <x>20</x>
+      <y>340</y>
       <width>631</width>
       <height>65</height>
      </rect>
@@ -1441,50 +1441,10 @@ ColorButton::disabled {
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>400</y>
+      <x>20</x>
+      <y>2</y>
       <width>631</width>
       <height>61</height>
-     </rect>
-    </property>
-    <layout class="QHBoxLayout" name="horizontalLayout_5">
-     <item>
-      <widget class="QPushButton" name="pb_reset">
-       <property name="text">
-        <string>RESET ALL</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="pb_run">
-       <property name="text">
-        <string>RUN</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="pb_Print">
-       <property name="text">
-        <string>PRINT</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="pb_Exit">
-       <property name="text">
-        <string>EXIT</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QWidget" name="layoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>10</y>
-      <width>561</width>
-      <height>53</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -1504,6 +1464,15 @@ ColorButton::disabled {
         <widget class="QComboBox" name="cm_Floor">
          <property name="currentIndex">
           <number>-1</number>
+         </property>
+         <property name="maxVisibleItems">
+          <number>7</number>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>20</width>
+           <height>20</height>
+          </size>
          </property>
          <item>
           <property name="text">
@@ -1670,13 +1639,98 @@ ColorButton::disabled {
      </item>
     </layout>
    </widget>
+   <widget class="QPushButton" name="pb_dltRow">
+    <property name="geometry">
+     <rect>
+      <x>670</x>
+      <y>270</y>
+      <width>121</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>DELETE FLOOR</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pb_find">
+    <property name="geometry">
+     <rect>
+      <x>670</x>
+      <y>110</y>
+      <width>121</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>FIND</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pb_reset">
+    <property name="geometry">
+     <rect>
+      <x>670</x>
+      <y>350</y>
+      <width>121</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>RESET ALL</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pb_list">
+    <property name="geometry">
+     <rect>
+      <x>670</x>
+      <y>190</y>
+      <width>121</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>LIST</string>
+    </property>
+   </widget>
+   <widget class="QWidget" name="layoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>410</y>
+      <width>631</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QPushButton" name="pb_run">
+       <property name="text">
+        <string>RUN</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pb_Print">
+       <property name="text">
+        <string>PRINT</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pb_Exit">
+       <property name="text">
+        <string>EXIT</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>679</width>
+     <width>801</width>
      <height>26</height>
     </rect>
    </property>

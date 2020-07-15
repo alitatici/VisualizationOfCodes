@@ -3,3 +3,4 @@
 2- Floor seçilmeden önce MASS ve RIGIDITY slotlarını "enable(False)" yap.
 3- DeleteRow için tuş ekle
     3.1- DeleteRow boş row seçilince program kapanıyor! DUZELT
+4- Current saved floor number: girilen katların numaralarını listele. -fetchall ile-

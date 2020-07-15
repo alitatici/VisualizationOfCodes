@@ -52,6 +52,17 @@ def makeList():
     for rowIndex, rowData in enumerate(curs):
         for columnIndex, columnData in enumerate(rowData):
             ui.tb_data.setItem(rowIndex,columnIndex,QTableWidgetItem(str(columnData)))
+    ui.lne_Mass.clear()
+    ui.lne_Rigidity.clear()
+    ui.cm_Floor.setCurrentIndex(-1) # "-1" comboBox içine hiçbirşey yazmamayı ifade eder.
+
+    #-----Current Floor Number-----#
+    curs.execute("SELECT COUNT (*) FROM sDyna")
+    floorNumber = curs.fetchone()
+    ui.label_savedFloor.setText(str(floorNumber[0]))
+    # floorNumbers = curs.fetchall()
+    # for i in len(floorNumbers):
+    #     ui.label_savedFloor.setText(str(i))
 
 
 #------------RESET ALL---------------#
@@ -102,13 +113,30 @@ def deleteRow():
         ui.statusbar.showMessage("Deleting process has been cancelled.",10000)
         WinMain.show()
 
+#--------------------SEARCH---------------------#
+#-----------------------------------------------#
+def search_():
+    search1=ui.cm_Floor.currentText()
+    search2=ui.lne_Mass.text()
+    search3=ui.lne_Rigidity.text()
+    curs.execute("SELECT * FROM sDyna WHERE Floor=? OR Mass=? OR Rigidity=? OR\
+                    (Mass=? AND Rigidity=?) OR (Floor=? AND Rigidity=?) OR (Mass=? AND Floor=?)",\
+                    (search1,search2,search3,search2,search3,search1,search3,search2,search1))
+    conn.commit
+    ui.tb_data.clearContents()
+    for rowIndex, rowData in enumerate(curs):
+        for columnIndex, columnData in enumerate(rowData):
+            ui.tb_data.setItem(rowIndex,columnIndex,QTableWidgetItem(str(columnData)))
+
 
 #---------------SIGNAL-SLOT---------------#
 #-----------------------------------------#
 ui.pb_Save.clicked.connect(addData)
 ui.pb_reset.clicked.connect(deleteAll)
 ui.pb_Exit.clicked.connect(exit_)
-ui.pb_Print.clicked.connect(deleteRow)
+ui.pb_dltRow.clicked.connect(deleteRow)
+ui.pb_find.clicked.connect(search_)
+ui.pb_list.clicked.connect(makeList)
 
 
 
