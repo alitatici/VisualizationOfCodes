@@ -14,21 +14,40 @@ ui = Ui_MainWindow() #sDynaUi.py class isminden kopyalandı.
 ui.setupUi(WinMain) #tasarımdaki form ile pencereyi birleştir
 WinMain.show() #pencereyi göster.
 
-sys.exit(Application.exec_()) #Çıkış yaparken uygulama ile ilgili tüm işlemleri sonlandırır.
+#sys.exit(Application.exec_()) #Çıkış yaparken uygulama ile ilgili tüm işlemleri sonlandırır.
 
 #---------------Create DataBase----------------#
 #----------------------------------------------#
 
 import sqlite3
-global curs
-global conn
-conn = sqlite3.connect("sDynaDB.db")
-curs=conn.cursor()
-queryCreTbl = "Create Table If not exists sDyna (Floor INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,Mass INTEGER NOT NULL,Rigidity INTEGER NOT NULL)"
-curs.execute(queryCreTbl)
-conn.commit()
 
+con = sqlite3.connect("sDynaDB.db")
+cursor = con.cursor()
 
+# queryCreTbl = ("CREATE TABLE IF NOT EXISTS sDyna(                    \
+#                 Floor INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,   \
+#                 Mass INTEGER NOT NULL,                              \
+#                 Rigidity INTEGER NOT NULL)")
 
+cursor.execute("CREATE TABLE IF NOT EXISTS sDyna(                    \
+                Floor INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,   \
+                Mass INTEGER NOT NULL,                              \
+                Rigidity INTEGER NOT NULL)")
+con.commit()
+
+#---------------SAVE---------------#
+#----------------------------------#
+
+def addData():
+    _lne_Mass = ui.lne_Mass.text()
+    _lne_Rigidity = ui.lne_Rigidity.text()
+
+    cursor.execute("INSERT INTO sDyna (Mass, Rigidity) VALUES (?,?)", (_lne_Mass,_lne_Rigidity))
+    con.commit()
+
+#---------------SIGNAL-SLOT---------------#
+#-----------------------------------------#
+
+ui.pb_Save.clicked.connect(addData)
 
 sys.exit(Application.exec_())
