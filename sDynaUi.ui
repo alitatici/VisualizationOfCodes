@@ -1635,7 +1635,7 @@ ColorButton::disabled {
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="lne_Rigidity"/>
+        <widget class="QLineEdit" name="lne_Mass"/>
        </item>
       </layout>
      </item>
@@ -1652,7 +1652,7 @@ ColorButton::disabled {
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="lne_Mass"/>
+        <widget class="QLineEdit" name="lne_Rigidityy"/>
        </item>
       </layout>
      </item>
