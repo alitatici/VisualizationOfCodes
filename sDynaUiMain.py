@@ -26,7 +26,7 @@ curs.execute("DELETE FROM sDyna")
 conn.commit()
 
 curs.execute("CREATE TABLE IF NOT EXISTS sDyna(                     \
-                Floor INTEGER NOT NULL PRIMARY KEY,                 \
+                Floor INTEGER NOT NULL,                             \
                 Mass INTEGER NOT NULL,                              \
                 Rigidity INTEGER NOT NULL)")
 conn.commit()
@@ -41,12 +41,29 @@ def addData():
 
     if bool(_lne_Mass) and bool(_lne_Rigidity) and bool(_cm_Floor)==True:
 
-        curs.execute("INSERT INTO sDyna (Floor, Mass, Rigidity) VALUES (?,?,?)", (_cm_Floor,_lne_Mass,_lne_Rigidity))
-        conn.commit()
+        curs.execute("SELECT Floor FROM sDyna")
+        liste = curs.fetchall()
+        if len(liste) != 0:
+            for j in range(len(liste)):
+                for i in liste[j]:
+                
+                    if i == int(_cm_Floor):
+                        QMessageBox.about(WinMain,"Error","This floor has added already.")
+                        WinMain.show()
+                    else:
+                        curs.execute("INSERT INTO sDyna (Floor, Mass, Rigidity) VALUES (?,?,?)", (_cm_Floor,_lne_Mass,_lne_Rigidity))
+                        conn.commit()
+
+        elif len(liste)== 0:
+            curs.execute("INSERT INTO sDyna (Floor, Mass, Rigidity) VALUES (?,?,?)", (_cm_Floor,_lne_Mass,_lne_Rigidity))
+            conn.commit()
+        
+        # curs.execute("INSERT INTO sDyna (Floor, Mass, Rigidity) VALUES (?,?,?)", (_cm_Floor,_lne_Mass,_lne_Rigidity))
+        # conn.commit()
         makeList()
         ui.lne_Mass.setEnabled(False)
         ui.lne_Rigidity.setEnabled(False)
-    
+
     else:
         ui.statusbar.showMessage("Error: Data must be entered.",10000)
 
@@ -77,17 +94,20 @@ def makeList():
 #------------RESET ALL---------------#
 #------------------------------------#
 def deleteAll():
-    answer1 = QMessageBox.question(WinMain,"Delete all","Are you sure to delete all?",\
+    answer1 = QMessageBox.question(WinMain,"Delete all","Are you sure to reset data?",\
                                     QMessageBox.Yes | QMessageBox.No)
-    curs.execute("DELETE FROM sDyna")
-    conn.commit()
-    ui.tb_data.clearContents() #tablo içeriğini siler.
-    ui.lne_Mass.clear()
-    ui.lne_Rigidity.clear()
-    ui.cm_Floor.setCurrentIndex(-1) # "-1" comboBox içine hiçbirşey yazmamayı ifade eder.
-    ui.lne_EQData.clear()
-    ui.lne_Seperator.clear()
-    ui.label_savedFloor.clear()
+    if answer1 == QMessageBox.Yes:    
+        curs.execute("DELETE FROM sDyna")
+        conn.commit()
+        ui.tb_data.clearContents() #tablo içeriğini siler.
+        ui.lne_Mass.clear()
+        ui.lne_Rigidity.clear()
+        ui.cm_Floor.setCurrentIndex(-1) # "-1" comboBox içine hiçbirşey yazmamayı ifade eder.
+        ui.lne_EQData.clear()
+        ui.lne_Seperator.clear()
+        ui.label_savedFloor.clear()
+    else:
+        WinMain.show()
 
 
 #------------------EXIT-------------------#

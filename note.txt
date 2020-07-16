@@ -1,4 +1,21 @@
 1- Floor benzersiz olmalı. Fakat aynı katı değiştirmek isterken hata veriyor. DUZELT.
 2- Change kaldı
 3- Delete Floor Düzlet
-4-
+4- Table Scroll not workin
+
+
+
+NOTE:
+###--------bunu desıngerdan sonra ekle----------##
+
+            #---------------lineEdit Enable----------------#
+            #----------------------------------------------#
+
+                    self.lne_Mass.setEnabled(False)
+                    self.lne_Rigidity.setEnabled(False) 
+                    self.cm_Floor.activated.connect(self.comboact) ########
+
+
+                def comboact(self):
+                    self.lne_Mass.setEnabled(True)
+                    self.lne_Rigidity.setEnabled(True)

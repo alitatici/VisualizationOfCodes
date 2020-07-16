@@ -1501,7 +1501,7 @@ class Ui_MainWindow(object):
         self.pb_reset.setText(_translate("MainWindow", "RESET ALL"))
         self.pb_run.setText(_translate("MainWindow", "RUN"))
         self.pb_Print.setText(_translate("MainWindow", "PRINT"))
-        self.pb_change.setText(_translate("MainWindow", "FIND"))
+        self.pb_change.setText(_translate("MainWindow", "CHANGE"))
         self.menuHelp.setTitle(_translate("MainWindow", "Help"))
         self.actionAbout.setText(_translate("MainWindow", "About"))
 
