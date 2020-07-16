@@ -64,7 +64,7 @@ def addData():
         checkUnique = 0
 
     else:
-        ui.statusbar.showMessage("Error: Data must be entered.",10000)
+        ui.statusbar.showMessage("Error: Data must be entered. Use Change button to change",10000)
 
 
 #---------------LIST---------------#
