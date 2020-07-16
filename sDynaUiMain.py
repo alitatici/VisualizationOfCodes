@@ -4,6 +4,7 @@ import sys
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import *
 from sDynaUi import *
+from about import *
 
 #--------------Create Application--------------#
 #----------------------------------------------#
@@ -12,6 +13,11 @@ WinMain = QMainWindow()
 ui = Ui_MainWindow() #sDynaUi.py class isminden kopyalandı.
 ui.setupUi(WinMain) #tasarımdaki form ile pencereyi birleştir
 WinMain.show() #pencereyi göster.
+
+WinAbout=QDialog()
+ui2 = Ui_Dialog()
+ui2.setupUi(WinAbout)
+
 
 #---------------Create DataBase----------------#
 #----------------------------------------------#
@@ -165,6 +171,12 @@ def search_():
             ui.tb_data.setItem(rowIndex,columnIndex,QTableWidgetItem(str(columnData)))
 
 
+#-----------------ABOUT-------------------#
+#-----------------------------------------#
+def about_():
+    WinAbout.show()
+
+
 #---------------SIGNAL-SLOT---------------#
 #-----------------------------------------#
 ui.pb_Save.clicked.connect(addData)
@@ -173,6 +185,7 @@ ui.pb_Exit.clicked.connect(exit_)
 ui.pb_dltRow.clicked.connect(deleteRow)
 ui.pb_find.clicked.connect(search_)
 ui.pb_list.clicked.connect(makeList)
+ui.menuHelp.triggered.connect(about_)
 
 
 
