@@ -14,7 +14,7 @@ def Pencere() :
     etiket1.setText("Lord of the Codes")
     etiket1.move(200,30)
 
-    #Fotograf Ekleme(ALİİ)
+    #Fotograf Ekleme
     etiket2=QtWidgets.QLabel(pencere)
     etiket2.setPixmap(QtGui.QPixmap("OnurSS.png"))
     etiket2.move(190,80)
@@ -32,4 +32,3 @@ def Pencere() :
 
 Pencere()
 
-print("Ali")
