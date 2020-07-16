@@ -1439,6 +1439,18 @@ class Ui_MainWindow(object):
         self.cm_Floor.setCurrentIndex(-1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
+#---------------lineEdit Enable----------------#
+#----------------------------------------------#
+
+        self.lne_Mass.setEnabled(False)
+        self.lne_Rigidity.setEnabled(False) 
+        self.cm_Floor.activated.connect(self.comboact) ########
+
+
+    def comboact(self):
+        self.lne_Mass.setEnabled(True)
+        self.lne_Rigidity.setEnabled(True)
+
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
