@@ -3,6 +3,9 @@
 3- Delete Floor tuşunu düzelt...
 4- Table'da Scroll özelliği çalışmıyor...
 5- Push Button'lara kullanıcı için açıklama ekle...
+6- Pencere çerçevesini düzenle. 
+    6.1- .PNG ekle
+    6.2- İsim ekle
 
 
 
