@@ -44,6 +44,8 @@ def addData():
         curs.execute("INSERT INTO sDyna (Floor, Mass, Rigidity) VALUES (?,?,?)", (_cm_Floor,_lne_Mass,_lne_Rigidity))
         conn.commit()
         makeList()
+        ui.lne_Mass.setEnabled(False)
+        ui.lne_Rigidity.setEnabled(False)
     
     else:
         ui.statusbar.showMessage("Error: Data must be entered.",10000)
@@ -67,6 +69,9 @@ def makeList():
     ui.label_savedFloor.setText(str(floorNumber[0]))
 
     # floorNumber[0] bizim kat sayımızı veriyor!!
+    # floorNumbers = curs.fetchall()
+    # ui.label_savedFloor.setText(str(len(floorNumbers)))
+
 
 
 #------------RESET ALL---------------#
