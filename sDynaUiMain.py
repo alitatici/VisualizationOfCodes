@@ -65,8 +65,13 @@ def makeList():
     curs.execute("SELECT COUNT (*) FROM sDyna")
     floorNumber = curs.fetchone()
     ui.label_savedFloor.setText(str(floorNumber[0]))
+<<<<<<< HEAD
 
     # floorNumber[0] bizim kat sayımızı veriyor!!
+=======
+    # floorNumbers = curs.fetchall()
+    # ui.label_savedFloor.setText(str(len(floorNumbers)))
+>>>>>>> Ali
 
 
 #------------RESET ALL---------------#
