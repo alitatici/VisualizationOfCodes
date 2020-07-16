@@ -1278,8 +1278,12 @@ class Ui_MainWindow(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.tb_data = QtWidgets.QTableWidget(self.centralwidget)
-        self.tb_data.setEnabled(False)
+        self.tb_data.setEnabled(True)
         self.tb_data.setGeometry(QtCore.QRect(20, 70, 631, 231))
+        self.tb_data.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
+        self.tb_data.setDragDropOverwriteMode(False)
+        self.tb_data.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)
+        self.tb_data.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
         self.tb_data.setRowCount(25)
         self.tb_data.setColumnCount(3)
         self.tb_data.setObjectName("tb_data")
@@ -1422,7 +1426,7 @@ class Ui_MainWindow(object):
         self.pb_change.setObjectName("pb_change")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 21))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 26))
         self.menubar.setObjectName("menubar")
         self.menuHelp = QtWidgets.QMenu(self.menubar)
         self.menuHelp.setObjectName("menuHelp")
@@ -1439,13 +1443,12 @@ class Ui_MainWindow(object):
         self.cm_Floor.setCurrentIndex(-1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-#---------------lineEdit Enable----------------#
-#----------------------------------------------#
+        #---------------lineEdit Enable----------------#
+        #----------------------------------------------#
 
         self.lne_Mass.setEnabled(False)
         self.lne_Rigidity.setEnabled(False) 
         self.cm_Floor.activated.connect(self.comboact) ########
-
 
     def comboact(self):
         self.lne_Mass.setEnabled(True)

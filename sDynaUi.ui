@@ -1279,7 +1279,7 @@ ColorButton::disabled {
   <widget class="QWidget" name="centralwidget">
    <widget class="QTableWidget" name="tb_data">
     <property name="enabled">
-     <bool>false</bool>
+     <bool>true</bool>
     </property>
     <property name="geometry">
      <rect>
@@ -1288,6 +1288,18 @@ ColorButton::disabled {
       <width>631</width>
       <height>231</height>
      </rect>
+    </property>
+    <property name="editTriggers">
+     <set>QAbstractItemView::NoEditTriggers</set>
+    </property>
+    <property name="dragDropOverwriteMode">
+     <bool>false</bool>
+    </property>
+    <property name="selectionMode">
+     <enum>QAbstractItemView::SingleSelection</enum>
+    </property>
+    <property name="selectionBehavior">
+     <enum>QAbstractItemView::SelectRows</enum>
     </property>
     <property name="rowCount">
      <number>25</number>
