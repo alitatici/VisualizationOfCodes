@@ -35,34 +35,33 @@ conn.commit()
 #---------------SAVE---------------#
 #----------------------------------#
 def addData():
+    checkUnique = 1
     _lne_Mass = ui.lne_Mass.text()
     _lne_Rigidity = ui.lne_Rigidity.text()
     _cm_Floor = ui.cm_Floor.currentText()
 
     if bool(_lne_Mass) and bool(_lne_Rigidity) and bool(_cm_Floor)==True:
-
+        
         curs.execute("SELECT Floor FROM sDyna")
         liste = curs.fetchall()
         if len(liste) != 0:
             for j in range(len(liste)):
                 for i in liste[j]:
-                
                     if i == int(_cm_Floor):
-                        QMessageBox.about(WinMain,"Error","This floor has added already.")
-                        WinMain.show()
-                    else:
-                        curs.execute("INSERT INTO sDyna (Floor, Mass, Rigidity) VALUES (?,?,?)", (_cm_Floor,_lne_Mass,_lne_Rigidity))
-                        conn.commit()
+                        checkUnique = 0
 
-        elif len(liste)== 0:
+        if checkUnique == 1:
             curs.execute("INSERT INTO sDyna (Floor, Mass, Rigidity) VALUES (?,?,?)", (_cm_Floor,_lne_Mass,_lne_Rigidity))
             conn.commit()
-        
-        # curs.execute("INSERT INTO sDyna (Floor, Mass, Rigidity) VALUES (?,?,?)", (_cm_Floor,_lne_Mass,_lne_Rigidity))
-        # conn.commit()
+
+        elif checkUnique == 0:
+            QMessageBox.about(WinMain,"Error","This floor has added already.")
+            # WinMain.show()
+
         makeList()
         ui.lne_Mass.setEnabled(False)
         ui.lne_Rigidity.setEnabled(False)
+        checkUnique = 0
 
     else:
         ui.statusbar.showMessage("Error: Data must be entered.",10000)
