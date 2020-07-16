@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>583</width>
-    <height>459</height>
+    <width>600</width>
+    <height>477</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -1276,30 +1276,11 @@ ColorButton::disabled {
     border: 1px solid #AAAAAA;
 }</string>
   </property>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>160</x>
-     <y>20</y>
-     <width>271</width>
-     <height>331</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="pixmap">
-    <pixmap>OnurSS.png</pixmap>
-   </property>
-   <property name="scaledContents">
-    <bool>true</bool>
-   </property>
-  </widget>
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>180</x>
-     <y>370</y>
+     <x>190</x>
+     <y>360</y>
      <width>211</width>
      <height>20</height>
     </rect>
@@ -1314,7 +1295,7 @@ ColorButton::disabled {
   <widget class="QLabel" name="label_3">
    <property name="geometry">
     <rect>
-     <x>180</x>
+     <x>190</x>
      <y>430</y>
      <width>211</width>
      <height>20</height>
@@ -1325,6 +1306,25 @@ ColorButton::disabled {
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>581</width>
+     <height>341</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap>OnurAliSS.png</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
    </property>
   </widget>
  </widget>

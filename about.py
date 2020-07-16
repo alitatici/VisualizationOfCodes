@@ -13,7 +13,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
-        Dialog.resize(583, 459)
+        Dialog.resize(600, 477)
         Dialog.setStyleSheet("/*\n"
 " * The MIT License (MIT)\n"
 " *\n"
@@ -1275,20 +1275,20 @@ class Ui_Dialog(object):
 "    border-radius: 0px;\n"
 "    border: 1px solid #AAAAAA;\n"
 "}")
-        self.label = QtWidgets.QLabel(Dialog)
-        self.label.setGeometry(QtCore.QRect(160, 20, 271, 331))
-        self.label.setText("")
-        self.label.setPixmap(QtGui.QPixmap("OnurSS.png"))
-        self.label.setScaledContents(True)
-        self.label.setObjectName("label")
         self.label_2 = QtWidgets.QLabel(Dialog)
-        self.label_2.setGeometry(QtCore.QRect(180, 370, 211, 20))
+        self.label_2.setGeometry(QtCore.QRect(190, 360, 211, 20))
         self.label_2.setAlignment(QtCore.Qt.AlignCenter)
         self.label_2.setObjectName("label_2")
         self.label_3 = QtWidgets.QLabel(Dialog)
-        self.label_3.setGeometry(QtCore.QRect(180, 430, 211, 20))
+        self.label_3.setGeometry(QtCore.QRect(190, 430, 211, 20))
         self.label_3.setAlignment(QtCore.Qt.AlignCenter)
         self.label_3.setObjectName("label_3")
+        self.label = QtWidgets.QLabel(Dialog)
+        self.label.setGeometry(QtCore.QRect(10, 10, 581, 341))
+        self.label.setText("")
+        self.label.setPixmap(QtGui.QPixmap("OnurAliSS.png"))
+        self.label.setScaledContents(True)
+        self.label.setObjectName("label")
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
@@ -1296,8 +1296,8 @@ class Ui_Dialog(object):
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "About"))
-        self.label_2.setText(_translate("Dialog", "Lord of the codes is watching you!"))
-        self.label_3.setText(_translate("Dialog", "Hakları saklı değildir. @2020"))
+        self.label_2.setText(_translate("Dialog", "Lords of the codes are watching you!"))
+        self.label_3.setText(_translate("Dialog", "Hakları saklı değildir, arayan bulur. @14.07.2020"))
 
 
 if __name__ == "__main__":
