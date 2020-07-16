@@ -1343,7 +1343,7 @@ class Ui_MainWindow(object):
         self.label_3.setObjectName("label_3")
         self.verticalLayout.addWidget(self.label_3)
         self.cm_Floor = QtWidgets.QComboBox(self.layoutWidget1)
-        self.cm_Floor.setMaxVisibleItems(7)
+        self.cm_Floor.setMaxVisibleItems(5)
         self.cm_Floor.setIconSize(QtCore.QSize(20, 20))
         self.cm_Floor.setObjectName("cm_Floor")
         self.cm_Floor.addItem("")
@@ -1438,6 +1438,26 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         self.cm_Floor.setCurrentIndex(-1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
+
+
+        self.lne_Mass.setEnabled(False)
+        self.lne_Rigidity.setEnabled(False) 
+        self.cm_Floor.activated.connect(self.do_something) ########
+
+    def do_something(self):
+        self.lne_Mass.setEnabled(True)
+        self.lne_Rigidity.setEnabled(True)
+
+    
+        #---------------lineEdit Enable----------------#
+        #----------------------------------------------#
+        
+        # self.cm_Floor.currentIndexChanged()
+
+        # if ui.cm_Floor.currentIndexChanged()==1:
+        #     ui.lne_Mass.setEnabled(False)
+        #     ui.lne_Rigidity.setEnabled(False)
+    
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate

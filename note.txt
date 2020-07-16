@@ -1,2 +1,4 @@
 1- Floor benzersiz olmalı. Fakat aynı katı değiştirmek isterken hata veriyor. DUZELT.
-2- Floor seçilmeden önce MASS ve RIGIDITY slotlarını "enable(False)" yap.
+2- Change kaldı
+3- Delete Floor Düzlet
+4-

@@ -13,6 +13,14 @@ ui = Ui_MainWindow() #sDynaUi.py class isminden kopyalandı.
 ui.setupUi(WinMain) #tasarımdaki form ile pencereyi birleştir
 WinMain.show() #pencereyi göster.
 
+#---------------lineEdit Enable----------------#
+#----------------------------------------------#
+
+# if ui.cm_Floor.currentIndexChanged():
+#     ui.lne_Mass.setEnabled(False)
+#     ui.lne_Rigidity.setEnabled(False)
+
+
 #---------------Create DataBase----------------#
 #----------------------------------------------#
 import sqlite3
@@ -44,6 +52,8 @@ def addData():
         curs.execute("INSERT INTO sDyna (Floor, Mass, Rigidity) VALUES (?,?,?)", (_cm_Floor,_lne_Mass,_lne_Rigidity))
         conn.commit()
         makeList()
+        ui.lne_Mass.setEnabled(False)
+        ui.lne_Rigidity.setEnabled(False)
     
     else:
         ui.statusbar.showMessage("Error: Data must be entered.",10000)
