@@ -1278,6 +1278,7 @@ class Ui_MainWindow(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.tb_data = QtWidgets.QTableWidget(self.centralwidget)
+        self.tb_data.setEnabled(False)
         self.tb_data.setGeometry(QtCore.QRect(20, 70, 631, 231))
         self.tb_data.setRowCount(25)
         self.tb_data.setColumnCount(3)

@@ -1278,6 +1278,9 @@ ColorButton::disabled {
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QTableWidget" name="tb_data">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>20</x>

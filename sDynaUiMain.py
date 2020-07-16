@@ -66,8 +66,7 @@ def makeList():
     floorNumber = curs.fetchone()
     ui.label_savedFloor.setText(str(floorNumber[0]))
     # floorNumbers = curs.fetchall()
-    # for i in len(floorNumbers):
-    #     ui.label_savedFloor.setText(str(i))
+    # ui.label_savedFloor.setText(str(len(floorNumbers)))
 
 
 #------------RESET ALL---------------#
