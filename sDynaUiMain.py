@@ -39,9 +39,14 @@ def addData():
     _lne_Rigidity = ui.lne_Rigidity.text()
     _cm_Floor = ui.cm_Floor.currentText()
 
-    curs.execute("INSERT INTO sDyna (Floor, Mass, Rigidity) VALUES (?,?,?)", (_cm_Floor,_lne_Mass,_lne_Rigidity))
-    conn.commit()
-    makeList()
+    if bool(_lne_Mass) and bool(_lne_Rigidity) and bool(_cm_Floor)==True:
+
+        curs.execute("INSERT INTO sDyna (Floor, Mass, Rigidity) VALUES (?,?,?)", (_cm_Floor,_lne_Mass,_lne_Rigidity))
+        conn.commit()
+        makeList()
+    
+    else:
+        ui.statusbar.showMessage("Error: Data must be entered.",10000)
 
 
 #---------------LIST---------------#
@@ -68,6 +73,8 @@ def makeList():
 #------------RESET ALL---------------#
 #------------------------------------#
 def deleteAll():
+    answer1 = QMessageBox.question(WinMain,"Delete all","Are you sure to delete all?",\
+                                    QMessageBox.Yes | QMessageBox.No)
     curs.execute("DELETE FROM sDyna")
     conn.commit()
     ui.tb_data.clearContents() #tablo içeriğini siler.
@@ -98,16 +105,22 @@ def deleteRow():
 
     if answer == QMessageBox.Yes:
         slcted = ui.tb_data.selectedItems()
-        dlt = slcted[0].text()
 
-        try:
-            curs.execute("DELETE FROM sDyna WHERE Floor='%s'"%(dlt))
-            conn.commit()
-            makeList()
-            ui.statusbar.showMessage(str(dlt)+". floor's data has been deleted successfully.",10000) #10000 milisaniye=10 saniye mesaj görünecek.
+        if bool(slcted)==True:
+            dlt = slcted[0].text()
+
+            try:
+                curs.execute("DELETE FROM sDyna WHERE Floor='%s'"%(dlt))
+                conn.commit()
+                makeList()
+                ui.statusbar.showMessage(str(dlt)+". floor's data has been deleted successfully.",10000) #10000 milisaniye=10 saniye mesaj görünecek.
+            
+            except Exception as Error:
+                ui.statusbar.showMessage("Error:"+str(Error),10000)
         
-        except Exception as Error:
-            ui.statusbar.showMessage("Error:"+str(Error),10000)
+        else:
+            ui.statusbar.showMessage("There is no selected items.",10000)
+
 
     else:
         ui.statusbar.showMessage("Deleting process has been cancelled.",10000)
