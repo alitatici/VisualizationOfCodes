@@ -23,6 +23,14 @@
                     self.lne_Mass.setEnabled(True)
                     self.lne_Rigidity.setEnabled(True)
 
+            #---------------Table Options------------------#
+            #----------------------------------------------#
+
+            self.tb_data.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
+            self.tb_data.setDragDropOverwriteMode(False)
+            self.tb_data.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)
+            self.tb_data.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
+
 
 Very last to do list:
 1- .exe'ye çevir.
