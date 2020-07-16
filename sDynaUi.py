@@ -1447,7 +1447,7 @@ class Ui_MainWindow(object):
         self.cm_Floor.activated.connect(self.comboact) ########
 
 
-    def combaact(self):
+    def comboact(self):
         self.lne_Mass.setEnabled(True)
         self.lne_Rigidity.setEnabled(True)
 
