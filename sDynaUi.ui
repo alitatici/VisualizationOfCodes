@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>801</width>
-    <height>548</height>
+    <width>800</width>
+    <height>511</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -1659,7 +1659,7 @@ ColorButton::disabled {
     <property name="geometry">
      <rect>
       <x>670</x>
-      <y>110</y>
+      <y>150</y>
       <width>121</width>
       <height>31</height>
      </rect>
@@ -1668,24 +1668,11 @@ ColorButton::disabled {
      <string>FIND</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pb_reset">
-    <property name="geometry">
-     <rect>
-      <x>670</x>
-      <y>350</y>
-      <width>121</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>RESET ALL</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="pb_list">
     <property name="geometry">
      <rect>
       <x>670</x>
-      <y>190</y>
+      <y>210</y>
       <width>121</width>
       <height>31</height>
      </rect>
@@ -1694,38 +1681,83 @@ ColorButton::disabled {
      <string>LIST</string>
     </property>
    </widget>
-   <widget class="QWidget" name="layoutWidget">
+   <widget class="QPushButton" name="pb_fromfile">
+    <property name="geometry">
+     <rect>
+      <x>670</x>
+      <y>340</y>
+      <width>121</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>FROM FILE</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pb_Exit">
+    <property name="geometry">
+     <rect>
+      <x>530</x>
+      <y>420</y>
+      <width>121</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>EXIT</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pb_reset">
+    <property name="geometry">
+     <rect>
+      <x>360</x>
+      <y>420</y>
+      <width>121</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>RESET ALL</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pb_run">
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>410</y>
-      <width>631</width>
-      <height>81</height>
+      <y>420</y>
+      <width>121</width>
+      <height>31</height>
      </rect>
     </property>
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <item>
-      <widget class="QPushButton" name="pb_run">
-       <property name="text">
-        <string>RUN</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="pb_Print">
-       <property name="text">
-        <string>PRINT</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="pb_Exit">
-       <property name="text">
-        <string>EXIT</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
+    <property name="text">
+     <string>RUN</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pb_Print">
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>420</y>
+      <width>121</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>PRINT</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pb_change">
+    <property name="geometry">
+     <rect>
+      <x>670</x>
+      <y>90</y>
+      <width>121</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>FIND</string>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -1733,8 +1765,8 @@ ColorButton::disabled {
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>801</width>
-     <height>26</height>
+     <width>800</width>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuHelp">
