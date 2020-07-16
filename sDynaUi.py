@@ -1439,24 +1439,20 @@ class Ui_MainWindow(object):
         self.cm_Floor.setCurrentIndex(-1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
+#---------------lineEdit Enable----------------#
+#----------------------------------------------#
 
         self.lne_Mass.setEnabled(False)
         self.lne_Rigidity.setEnabled(False) 
-        self.cm_Floor.activated.connect(self.do_something) ########
+        self.cm_Floor.activated.connect(self.comboact) ########
 
-    def do_something(self):
+
+    def combaact(self):
         self.lne_Mass.setEnabled(True)
         self.lne_Rigidity.setEnabled(True)
 
     
-        #---------------lineEdit Enable----------------#
-        #----------------------------------------------#
-        
-        # self.cm_Floor.currentIndexChanged()
 
-        # if ui.cm_Floor.currentIndexChanged()==1:
-        #     ui.lne_Mass.setEnabled(False)
-        #     ui.lne_Rigidity.setEnabled(False)
     
 
     def retranslateUi(self, MainWindow):

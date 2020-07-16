@@ -13,14 +13,6 @@ ui = Ui_MainWindow() #sDynaUi.py class isminden kopyalandı.
 ui.setupUi(WinMain) #tasarımdaki form ile pencereyi birleştir
 WinMain.show() #pencereyi göster.
 
-#---------------lineEdit Enable----------------#
-#----------------------------------------------#
-
-# if ui.cm_Floor.currentIndexChanged():
-#     ui.lne_Mass.setEnabled(False)
-#     ui.lne_Rigidity.setEnabled(False)
-
-
 #---------------Create DataBase----------------#
 #----------------------------------------------#
 import sqlite3
