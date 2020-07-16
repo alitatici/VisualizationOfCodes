@@ -26,7 +26,7 @@ curs.execute("DELETE FROM sDyna")
 conn.commit()
 
 curs.execute("CREATE TABLE IF NOT EXISTS sDyna(                     \
-                Floor INTEGER NOT NULL,                             \
+                Floor INTEGER NOT NULL PRIMARY KEY,                             \
                 Mass INTEGER NOT NULL,                              \
                 Rigidity INTEGER NOT NULL)")
 conn.commit()
