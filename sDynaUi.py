@@ -13,7 +13,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(801, 548)
+        MainWindow.resize(800, 511)
         MainWindow.setStyleSheet("/*\n"
 " * The MIT License (MIT)\n"
 " *\n"
@@ -1343,7 +1343,7 @@ class Ui_MainWindow(object):
         self.label_3.setObjectName("label_3")
         self.verticalLayout.addWidget(self.label_3)
         self.cm_Floor = QtWidgets.QComboBox(self.layoutWidget1)
-        self.cm_Floor.setMaxVisibleItems(5)
+        self.cm_Floor.setMaxVisibleItems(7)
         self.cm_Floor.setIconSize(QtCore.QSize(20, 20))
         self.cm_Floor.setObjectName("cm_Floor")
         self.cm_Floor.addItem("")
@@ -1397,32 +1397,32 @@ class Ui_MainWindow(object):
         self.pb_dltRow.setGeometry(QtCore.QRect(670, 270, 121, 31))
         self.pb_dltRow.setObjectName("pb_dltRow")
         self.pb_find = QtWidgets.QPushButton(self.centralwidget)
-        self.pb_find.setGeometry(QtCore.QRect(670, 110, 121, 31))
+        self.pb_find.setGeometry(QtCore.QRect(670, 150, 121, 31))
         self.pb_find.setObjectName("pb_find")
-        self.pb_reset = QtWidgets.QPushButton(self.centralwidget)
-        self.pb_reset.setGeometry(QtCore.QRect(670, 350, 121, 31))
-        self.pb_reset.setObjectName("pb_reset")
         self.pb_list = QtWidgets.QPushButton(self.centralwidget)
-        self.pb_list.setGeometry(QtCore.QRect(670, 190, 121, 31))
+        self.pb_list.setGeometry(QtCore.QRect(670, 210, 121, 31))
         self.pb_list.setObjectName("pb_list")
-        self.layoutWidget2 = QtWidgets.QWidget(self.centralwidget)
-        self.layoutWidget2.setGeometry(QtCore.QRect(20, 410, 631, 81))
-        self.layoutWidget2.setObjectName("layoutWidget2")
-        self.horizontalLayout = QtWidgets.QHBoxLayout(self.layoutWidget2)
-        self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
-        self.horizontalLayout.setObjectName("horizontalLayout")
-        self.pb_run = QtWidgets.QPushButton(self.layoutWidget2)
-        self.pb_run.setObjectName("pb_run")
-        self.horizontalLayout.addWidget(self.pb_run)
-        self.pb_Print = QtWidgets.QPushButton(self.layoutWidget2)
-        self.pb_Print.setObjectName("pb_Print")
-        self.horizontalLayout.addWidget(self.pb_Print)
-        self.pb_Exit = QtWidgets.QPushButton(self.layoutWidget2)
+        self.pb_fromfile = QtWidgets.QPushButton(self.centralwidget)
+        self.pb_fromfile.setGeometry(QtCore.QRect(670, 340, 121, 28))
+        self.pb_fromfile.setObjectName("pb_fromfile")
+        self.pb_Exit = QtWidgets.QPushButton(self.centralwidget)
+        self.pb_Exit.setGeometry(QtCore.QRect(530, 420, 121, 31))
         self.pb_Exit.setObjectName("pb_Exit")
-        self.horizontalLayout.addWidget(self.pb_Exit)
+        self.pb_reset = QtWidgets.QPushButton(self.centralwidget)
+        self.pb_reset.setGeometry(QtCore.QRect(360, 420, 121, 31))
+        self.pb_reset.setObjectName("pb_reset")
+        self.pb_run = QtWidgets.QPushButton(self.centralwidget)
+        self.pb_run.setGeometry(QtCore.QRect(20, 420, 121, 31))
+        self.pb_run.setObjectName("pb_run")
+        self.pb_Print = QtWidgets.QPushButton(self.centralwidget)
+        self.pb_Print.setGeometry(QtCore.QRect(190, 420, 121, 31))
+        self.pb_Print.setObjectName("pb_Print")
+        self.pb_change = QtWidgets.QPushButton(self.centralwidget)
+        self.pb_change.setGeometry(QtCore.QRect(670, 90, 121, 31))
+        self.pb_change.setObjectName("pb_change")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 801, 26))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 21))
         self.menubar.setObjectName("menubar")
         self.menuHelp = QtWidgets.QMenu(self.menubar)
         self.menuHelp.setObjectName("menuHelp")
@@ -1438,22 +1438,6 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         self.cm_Floor.setCurrentIndex(-1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
-
-#---------------lineEdit Enable----------------#
-#----------------------------------------------#
-
-        self.lne_Mass.setEnabled(False)
-        self.lne_Rigidity.setEnabled(False) 
-        self.cm_Floor.activated.connect(self.comboact) ########
-
-
-    def combaact(self):
-        self.lne_Mass.setEnabled(True)
-        self.lne_Rigidity.setEnabled(True)
-
-    
-
-    
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -1499,11 +1483,13 @@ class Ui_MainWindow(object):
         self.label_2.setText(_translate("MainWindow", "Rigidity"))
         self.pb_dltRow.setText(_translate("MainWindow", "DELETE FLOOR"))
         self.pb_find.setText(_translate("MainWindow", "FIND"))
-        self.pb_reset.setText(_translate("MainWindow", "RESET ALL"))
         self.pb_list.setText(_translate("MainWindow", "LIST"))
+        self.pb_fromfile.setText(_translate("MainWindow", "FROM FILE"))
+        self.pb_Exit.setText(_translate("MainWindow", "EXIT"))
+        self.pb_reset.setText(_translate("MainWindow", "RESET ALL"))
         self.pb_run.setText(_translate("MainWindow", "RUN"))
         self.pb_Print.setText(_translate("MainWindow", "PRINT"))
-        self.pb_Exit.setText(_translate("MainWindow", "EXIT"))
+        self.pb_change.setText(_translate("MainWindow", "FIND"))
         self.menuHelp.setTitle(_translate("MainWindow", "Help"))
         self.actionAbout.setText(_translate("MainWindow", "About"))
 
