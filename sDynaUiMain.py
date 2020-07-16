@@ -40,13 +40,23 @@ def addData():
     _cm_Floor = ui.cm_Floor.currentText()
 
     if bool(_lne_Mass) and bool(_lne_Rigidity) and bool(_cm_Floor)==True:
-
-        curs.execute("INSERT INTO sDyna (Floor, Mass, Rigidity) VALUES (?,?,?)", (_cm_Floor,_lne_Mass,_lne_Rigidity))
-        conn.commit()
+        curs.execute("SELECT Floor FROM sDyna")
+        liste=curs.fetchall()
+        if len(liste)!=0:
+            for j in range(start=0, stop=len(liste)):
+                for i in liste[j]:
+                    if i==_cm_Floor:
+                        ui.statusbar.showMessage("Error: There is the same floor which you choose.",10000)
+                    else:
+                        curs.execute("INSERT INTO sDyna (Floor, Mass, Rigidity) VALUES (?,?,?)", (_cm_Floor,_lne_Mass,_lne_Rigidity))
+                        conn.commit()
+        else:
+            curs.execute("INSERT INTO sDyna (Floor, Mass, Rigidity) VALUES (?,?,?)", (_cm_Floor,_lne_Mass,_lne_Rigidity))
+            conn.commit()
+            
         makeList()
         ui.lne_Mass.setEnabled(False)
-        ui.lne_Rigidity.setEnabled(False)
-    
+        ui.lne_Rigidity.setEnabled(False)  
     else:
         ui.statusbar.showMessage("Error: Data must be entered.",10000)
 
