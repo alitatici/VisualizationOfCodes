@@ -1,4 +1,25 @@
-1- Floor benzersiz olmalı. Fakat aynı katı değiştirmek isterken hata veriyor. DUZELT.
-2- Change kaldı
-3- Delete Floor Düzlet
-4-
+1- KONTROL EDİLMELİ, ALİ YAPTI... *****Floor benzersiz olmalı. Fakat aynı katı değiştirmek isterken hata veriyor. DUZELT.*****
+2- Change tuşunu ekle...
+3- Delete Floor tuşunu düzelt...
+4- Table'da Scroll özelliği çalışmıyor...
+5- Push Button'lara kullanıcı için açıklama ekle...
+6- Pencere çerçevesini düzenle. 
+    6.1- .PNG ekle
+    6.2- İsim ekle
+
+
+
+ÖNEMLİ NOT:
+###--------BURAYI DESIGN'DA DEGISIM YAPILIRSA sDynaUi.py DOSYASINA EKLEMEYİ UNUTMA----------##
+
+            #---------------lineEdit Enable----------------#
+            #----------------------------------------------#
+
+                    self.lne_Mass.setEnabled(False)
+                    self.lne_Rigidity.setEnabled(False) 
+                    self.cm_Floor.activated.connect(self.comboact) ########
+
+
+                def comboact(self):
+                    self.lne_Mass.setEnabled(True)
+                    self.lne_Rigidity.setEnabled(True)

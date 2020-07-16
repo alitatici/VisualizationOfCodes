@@ -1756,7 +1756,7 @@ ColorButton::disabled {
      </rect>
     </property>
     <property name="text">
-     <string>FIND</string>
+     <string>CHANGE</string>
     </property>
    </widget>
   </widget>

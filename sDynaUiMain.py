@@ -26,7 +26,7 @@ curs.execute("DELETE FROM sDyna")
 conn.commit()
 
 curs.execute("CREATE TABLE IF NOT EXISTS sDyna(                     \
-                Floor INTEGER NOT NULL PRIMARY KEY,                 \
+                Floor INTEGER NOT NULL PRIMARY KEY,                             \
                 Mass INTEGER NOT NULL,                              \
                 Rigidity INTEGER NOT NULL)")
 conn.commit()
@@ -35,30 +35,34 @@ conn.commit()
 #---------------SAVE---------------#
 #----------------------------------#
 def addData():
+    checkUnique = 1
     _lne_Mass = ui.lne_Mass.text()
     _lne_Rigidity = ui.lne_Rigidity.text()
     _cm_Floor = ui.cm_Floor.currentText()
 
     if bool(_lne_Mass) and bool(_lne_Rigidity) and bool(_cm_Floor)==True:
+        
         curs.execute("SELECT Floor FROM sDyna")
-        liste=curs.fetchall()
-        if len(liste)!=0:
-            for i in liste:
-                if i==int(_cm_Floor):
-                    ui.statusbar.showMessage("Error: There is the same floor which you choose.",10000)
-                elif i != int(_cm_Floor):
-                    curs.execute("INSERT INTO sDyna (Floor, Mass, Rigidity) VALUES (?,?,?)", (_cm_Floor,_lne_Mass,_lne_Rigidity))
-                    conn.commit()
-                    makeList()
-                else:
-                    ui.statusbar.showMessage("Error: a",10000)
-        else:
+        liste = curs.fetchall()
+        if len(liste) != 0:
+            for j in range(len(liste)):
+                for i in liste[j]:
+                    if i == int(_cm_Floor):
+                        checkUnique = 0
+
+        if checkUnique == 1:
             curs.execute("INSERT INTO sDyna (Floor, Mass, Rigidity) VALUES (?,?,?)", (_cm_Floor,_lne_Mass,_lne_Rigidity))
             conn.commit()
-            makeList()
-            
+
+        elif checkUnique == 0:
+            QMessageBox.about(WinMain,"Error","This floor has added already.")
+            # WinMain.show()
+
+        makeList()
         ui.lne_Mass.setEnabled(False)
-        ui.lne_Rigidity.setEnabled(False)  
+        ui.lne_Rigidity.setEnabled(False)
+        checkUnique = 0
+
     else:
         ui.statusbar.showMessage("Error: Data must be entered.",10000)
 
@@ -89,17 +93,20 @@ def makeList():
 #------------RESET ALL---------------#
 #------------------------------------#
 def deleteAll():
-    answer1 = QMessageBox.question(WinMain,"Delete all","Are you sure to delete all?",\
+    answer1 = QMessageBox.question(WinMain,"Delete all","Are you sure to reset data?",\
                                     QMessageBox.Yes | QMessageBox.No)
-    curs.execute("DELETE FROM sDyna")
-    conn.commit()
-    ui.tb_data.clearContents() #tablo içeriğini siler.
-    ui.lne_Mass.clear()
-    ui.lne_Rigidity.clear()
-    ui.cm_Floor.setCurrentIndex(-1) # "-1" comboBox içine hiçbirşey yazmamayı ifade eder.
-    ui.lne_EQData.clear()
-    ui.lne_Seperator.clear()
-    ui.label_savedFloor.clear()
+    if answer1 == QMessageBox.Yes:    
+        curs.execute("DELETE FROM sDyna")
+        conn.commit()
+        ui.tb_data.clearContents() #tablo içeriğini siler.
+        ui.lne_Mass.clear()
+        ui.lne_Rigidity.clear()
+        ui.cm_Floor.setCurrentIndex(-1) # "-1" comboBox içine hiçbirşey yazmamayı ifade eder.
+        ui.lne_EQData.clear()
+        ui.lne_Seperator.clear()
+        ui.label_savedFloor.clear()
+    else:
+        WinMain.show()
 
 
 #------------------EXIT-------------------#
