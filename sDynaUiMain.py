@@ -167,28 +167,28 @@ def changeRow():
 
     if bool(_lne_Mass) and bool(_lne_Rigidity) and bool(_cm_Floor)==True:
         
-        curs.execute("SELECT Floor FROM sDyna")
-        liste = curs.fetchall()
-        for j in range(len(liste)):
-            for i in liste[j]:
-                if i == int(_cm_Floor):
-                    uniquenumber=0
-        
-        if uniquenumber==0:
-            curs.execute("UPDATE sDyna SET Mass = ?, Rigidity = ? WHERE Floor = ?" , (_lne_Mass,_lne_Rigidity,_cm_Floor))
-            conn.commit()
-
-        else:
-            QMessageBox.about(WinMain,"Error","Choosen floor cannot be find in table.Please save the floor first.")
-            # WinMain.show()
-
-        makeList()
-        ui.lne_Mass.setEnabled(False)
-        ui.lne_Rigidity.setEnabled(False)
-        checkUnique = 0
+    curs.execute("SELECT Floor FROM sDyna")
+    liste = curs.fetchall()
+    for j in range(len(liste)):
+        for i in liste[j]:
+            if i == int(_cm_Floor):
+                uniquenumber=0
+    
+    if uniquenumber==0:
+        curs.execute("UPDATE sDyna SET Mass = ?, OR Rigidity = ? WHERE Floor = ?" , (_lne_Mass,_lne_Rigidity,_cm_Floor))
+        conn.commit()
 
     else:
-        ui.statusbar.showMessage("Error: Data cannot be changed.",10000)
+        QMessageBox.about(WinMain,"Error","Choosen floor cannot be find in table.Please save the floor first.")
+        # WinMain.show()
+
+    makeList()
+    ui.lne_Mass.setEnabled(False)
+    ui.lne_Rigidity.setEnabled(False)
+    checkUnique = 0
+
+    else:
+        ui.statusbar.showMessage("Error: All data must be entered.",10000)
 
 
 #--------------------SEARCH---------------------#
