@@ -61,7 +61,7 @@ def addData():
             conn.commit()
 
         elif checkUnique == 0:
-            QMessageBox.about(WinMain,"Error","This floor has added already. Use Change button to change.")
+            QMessageBox.about(WinMain,"Error","This floor has added already. Use Change button to change")
             # WinMain.show()
 
         makeList()
@@ -155,6 +155,42 @@ def deleteRow():
         ui.statusbar.showMessage("Deleting process has been cancelled.",10000)
         WinMain.show()
 
+#------------------CHANGE-ROW-------------------#
+#-----------------------------------------------#
+def changeRow():
+    answer2 = QMessageBox.question(WinMain,"Change the floor's features","Are you sure to change this floor?",\
+                                    QMessageBox.Yes | QMessageBox.No)
+    uniquenumber=1            
+    _lne_Mass = ui.lne_Mass.text()
+    _lne_Rigidity = ui.lne_Rigidity.text()
+    _cm_Floor = ui.cm_Floor.currentText()
+
+    if bool(_lne_Mass) and bool(_lne_Rigidity) and bool(_cm_Floor)==True:
+        
+        curs.execute("SELECT Floor FROM sDyna")
+        liste = curs.fetchall()
+        for j in range(len(liste)):
+            for i in liste[j]:
+                if i == int(_cm_Floor):
+                    uniquenumber=0
+        
+        if uniquenumber==0:
+            curs.execute("UPDATE sDyna SET Mass = ?, Rigidity = ? WHERE Floor = ?" , (_lne_Mass,_lne_Rigidity,_cm_Floor))
+            conn.commit()
+
+        else:
+            QMessageBox.about(WinMain,"Error","Choosen floor cannot be find in table.Please save the floor first.")
+            # WinMain.show()
+
+        makeList()
+        ui.lne_Mass.setEnabled(False)
+        ui.lne_Rigidity.setEnabled(False)
+        checkUnique = 0
+
+    else:
+        ui.statusbar.showMessage("Error: Data cannot be changed.",10000)
+
+
 #--------------------SEARCH---------------------#
 #-----------------------------------------------#
 def search_():
@@ -186,6 +222,7 @@ ui.pb_dltRow.clicked.connect(deleteRow)
 ui.pb_find.clicked.connect(search_)
 ui.pb_list.clicked.connect(makeList)
 ui.menuHelp.triggered.connect(about_)
+ui.pb_change.clicked.connect(changeRow)
 
 
 

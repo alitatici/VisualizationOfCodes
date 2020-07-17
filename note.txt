@@ -1,11 +1,10 @@
-1- Change tuşunu ekle...
------------------------Delete Floor tuşunu düzelt...
------------------------Table'da Scroll özelliği çalışmıyor...
-4- Push Button'lara kullanıcı için açıklama ekle...
-5- Pencere çerçevesini düzenle. 
+1- KONTROL EDİLMELİ, ALİ YAPTI... *****Floor benzersiz olmalı. Fakat aynı katı değiştirmek isterken hata veriyor. DUZELT.*****
+2- Change tuşunu ekle...
+5- Push Button'lara kullanıcı için açıklama ekle...
+6- Pencere çerçevesini düzenle. 
     6.1- .PNG ekle
     6.2- İsim ekle
-6- Print tuşuna basınca kayıt edeceği klasörü seçsin.
+
 
 
 ÖNEMLİ NOT:
@@ -23,16 +22,11 @@
                     self.lne_Mass.setEnabled(True)
                     self.lne_Rigidity.setEnabled(True)
 
-            #---------------Table Options------------------#
-            #----------------------------------------------#
+#---------------lineEdit Enable----------------#
+#----------------------------------------------#
 
-            self.tb_data.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
-            self.tb_data.setDragDropOverwriteMode(False)
-            self.tb_data.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)
-            self.tb_data.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
-
-
-Very last to do list:
-1- .exe'ye çevir.
-2- Üst menüyü düzenle, hakkımızda, kullanım kılavuzu, file new print save save as, exit ekle.
-3- 
+        self.tb_data.setDragEnabled(False)
+        self.tb_data.setDragDropOverwriteMode(False)
+        self.tb_data.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)
+        self.tb_data.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
+        self.tb_data.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
