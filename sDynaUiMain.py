@@ -10,7 +10,7 @@ from about import *
 #----------------------------------------------#
 Application = QApplication(sys.argv)
 WinMain = QMainWindow()
-ui = Ui_MainWindow() #sDynaUi.py class isminden kopyalandı.
+ui = Ui_sDyna() #sDynaUi.py class isminden kopyalandı.
 ui.setupUi(WinMain) #tasarımdaki form ile pencereyi birleştir
 WinMain.show() #pencereyi göster.
 
@@ -37,6 +37,15 @@ curs.execute("CREATE TABLE IF NOT EXISTS sDyna(                     \
                 Rigidity INTEGER NOT NULL)")
 conn.commit()
 
+#---------------lineEdit Enable----------------#
+#----------------------------------------------#
+
+ui.lne_Mass.setEnabled(False)
+ui.lne_Rigidity.setEnabled(False)
+
+def comboact():
+    ui.lne_Mass.setEnabled(True)
+    ui.lne_Rigidity.setEnabled(True)
 
 #---------------SAVE---------------#
 #----------------------------------#
@@ -59,14 +68,14 @@ def addData():
         if checkUnique == 1:
             curs.execute("INSERT INTO sDyna (Floor, Mass, Rigidity) VALUES (?,?,?)", (_cm_Floor,_lne_Mass,_lne_Rigidity))
             conn.commit()
+            makeList()
+            ui.lne_Mass.setEnabled(False)
+            ui.lne_Rigidity.setEnabled(False)
 
         elif checkUnique == 0:
             QMessageBox.about(WinMain,"Error","This floor has added already. Use Change button to change")
-            # WinMain.show()
+            WinMain.show()
 
-        makeList()
-        ui.lne_Mass.setEnabled(False)
-        ui.lne_Rigidity.setEnabled(False)
         checkUnique = 0
 
     else:
@@ -177,15 +186,24 @@ def changeRow():
         if uniquenumber==0:
             curs.execute("UPDATE sDyna SET Mass = ?, Rigidity = ? WHERE Floor = ?" , (_lne_Mass,_lne_Rigidity,_cm_Floor))
             conn.commit()
+<<<<<<< HEAD
             makeList()
             ui.lne_Mass.setEnabled(False)
             ui.lne_Rigidity.setEnabled(False)
+=======
+>>>>>>> Ali
 
         else:
             QMessageBox.about(WinMain,"Error","Choosen floor cannot be find in table.Please save the floor first.")
             # WinMain.show()
 
+<<<<<<< HEAD
         
+=======
+        makeList()
+        ui.lne_Mass.setEnabled(False)
+        ui.lne_Rigidity.setEnabled(False)
+>>>>>>> Ali
         checkUnique = 0
 
     else:
@@ -213,10 +231,29 @@ def search_():
 def about_():
     WinAbout.show()
 
+#---------------EQ FILE-------------------#
+#-----------------------------------------#
+def eqfile():
+    options = QFileDialog.Options()
+    options |= QFileDialog.DontUseNativeDialog
+    fileName, _ = QFileDialog.getOpenFileName(WinMain,"Select Earthquake File", "","Text Files (*.txt)", options=options)
+    ui.lne_EQData.setText(fileName)
+
+
+#---------------SAVE FILE-----------------#
+#-----------------------------------------#
+def saveFile():
+    options = QFileDialog.Options()
+    options |= QFileDialog.DontUseNativeDialog
+    savedfileName, _ = QFileDialog.getSaveFileName(WinMain,"QFileDialog.getSaveFileName()","","All Files (*);;Xls Files (*.xls)", options=options)
+    file = open(savedfileName,'w')
+    text = ui.tb_data.toPlainText()
+    file.write(text)
+    file.close()
 
 #---------------SIGNAL-SLOT---------------#
 #-----------------------------------------#
-ui.pb_Save.clicked.connect(addData)
+ui.pb_Add.clicked.connect(addData)
 ui.pb_reset.clicked.connect(deleteAll)
 ui.pb_Exit.clicked.connect(exit_)
 ui.pb_dltRow.clicked.connect(deleteRow)
@@ -224,6 +261,9 @@ ui.pb_find.clicked.connect(search_)
 ui.pb_list.clicked.connect(makeList)
 ui.menuHelp.triggered.connect(about_)
 ui.pb_change.clicked.connect(changeRow)
+ui.cm_Floor.activated.connect(comboact) ########
+ui.pb_fromfile.clicked.connect(eqfile)
+ui.pb_Save.clicked.connect(saveFile)
 
 
 
