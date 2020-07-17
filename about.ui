@@ -1286,7 +1286,7 @@ ColorButton::disabled {
     </rect>
    </property>
    <property name="text">
-    <string>Lord of the codes is watching you!</string>
+    <string>Lord of the codes are watching you!</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
@@ -1295,14 +1295,14 @@ ColorButton::disabled {
   <widget class="QLabel" name="label_3">
    <property name="geometry">
     <rect>
-     <x>190</x>
+     <x>150</x>
      <y>430</y>
-     <width>211</width>
+     <width>291</width>
      <height>20</height>
     </rect>
    </property>
    <property name="text">
-    <string>Hakları saklı değildir. @2020</string>
+    <string>Hakları saklı değildir. Arayan bulup çalabilir. @14.07.2020</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
