@@ -5,6 +5,7 @@ from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import *
 from sDynaUi import *
 from about import *
+import xlsxwriter
 
 #--------------Create Application--------------#
 #----------------------------------------------#
@@ -47,6 +48,7 @@ def comboact():
     ui.lne_Mass.setEnabled(True)
     ui.lne_Rigidity.setEnabled(True)
 
+
 #---------------SAVE---------------#
 #----------------------------------#
 def addData():
@@ -54,34 +56,41 @@ def addData():
     _lne_Mass = ui.lne_Mass.text()
     _lne_Rigidity = ui.lne_Rigidity.text()
     _cm_Floor = ui.cm_Floor.currentText()
-
-    if bool(_lne_Mass) and bool(_lne_Rigidity) and bool(_cm_Floor)==True:
+    try:
+        _lne_Mass= float(_lne_Mass)
+        _lne_Rigidity=float(_lne_Rigidity)
+        if bool(_lne_Mass) and bool(_lne_Rigidity) and bool(_cm_Floor)==True:
         
-        curs.execute("SELECT Floor FROM sDyna")
-        liste = curs.fetchall()
-        if len(liste) != 0:
-            for j in range(len(liste)):
-                for i in liste[j]:
-                    if i == int(_cm_Floor):
-                        checkUnique = 0
+            curs.execute("SELECT Floor FROM sDyna")
+            liste = curs.fetchall()
+            if len(liste) != 0:
+                for j in range(len(liste)):
+                    for i in liste[j]:
+                        if i == int(_cm_Floor):
+                            checkUnique = 0
 
-        if checkUnique == 1:
-            curs.execute("INSERT INTO sDyna (Floor, Mass, Rigidity) VALUES (?,?,?)", (_cm_Floor,_lne_Mass,_lne_Rigidity))
-            conn.commit()
-            makeList()
-            ui.lne_Mass.setEnabled(False)
-            ui.lne_Rigidity.setEnabled(False)
+            if checkUnique == 1:
+                curs.execute("INSERT INTO sDyna (Floor, Mass, Rigidity) VALUES (?,?,?)", (_cm_Floor,_lne_Mass,_lne_Rigidity))
+                conn.commit()
+                makeList()
+                ui.lne_Mass.setEnabled(False)
+                ui.lne_Rigidity.setEnabled(False)
 
-        elif checkUnique == 0:
-            QMessageBox.about(WinMain,"Error","This floor has added already. Use Change button to change")
-            WinMain.show()
+            elif checkUnique == 0:
+                QMessageBox.about(WinMain,"Error","This floor has added already. Use Change button to change")
+                WinMain.show()
 
-        checkUnique = 0
+            checkUnique = 0
 
-    else:
-        ui.statusbar.showMessage("Error: Data must be entered.",10000)
+        else:
+            ui.statusbar.showMessage("Error: Data must be entered.",10000)
 
 
+    except Exception:
+        QMessageBox.about(WinMain,'Error','Input can only be a number')
+        pass
+
+    
 #---------------LIST---------------#
 #----------------------------------#
 def makeList():
@@ -174,40 +183,45 @@ def changeRow():
     _lne_Rigidity = ui.lne_Rigidity.text()
     _cm_Floor = ui.cm_Floor.currentText()
 
-    if bool(_lne_Mass) and bool(_lne_Rigidity) and bool(_cm_Floor)==True:
-        
-        curs.execute("SELECT Floor FROM sDyna")
-        liste = curs.fetchall()
-        for j in range(len(liste)):
-            for i in liste[j]:
-                if i == int(_cm_Floor):
-                    uniquenumber=0
-        
-        if uniquenumber==0:
-            curs.execute("UPDATE sDyna SET Mass = ?, Rigidity = ? WHERE Floor = ?" , (_lne_Mass,_lne_Rigidity,_cm_Floor))
-            conn.commit()
-<<<<<<< HEAD
-            makeList()
-            ui.lne_Mass.setEnabled(False)
-            ui.lne_Rigidity.setEnabled(False)
-=======
->>>>>>> Ali
+    try:
+        _lne_Mass=float(_lne_Mass)
+        _lne_Rigidity=float(_lne_Rigidity)
 
+        if answer2 == QMessageBox.Yes:
+
+            if bool(_lne_Mass) and bool(_lne_Rigidity) and bool(_cm_Floor)==True:
+                
+                curs.execute("SELECT Floor FROM sDyna")
+                liste = curs.fetchall()
+                for j in range(len(liste)):
+                    for i in liste[j]:
+                        if i == int(_cm_Floor):
+                            uniquenumber=0
+                
+                if uniquenumber==0:
+                    curs.execute("UPDATE sDyna SET Mass = ?, Rigidity = ? WHERE Floor = ?" , (_lne_Mass,_lne_Rigidity,_cm_Floor))
+                    conn.commit()
+                    makeList()
+                    ui.lne_Mass.setEnabled(False)
+                    ui.lne_Rigidity.setEnabled(False)
+
+                else:
+                    QMessageBox.about(WinMain,"Error","Choosen floor cannot be find in table.Please save the floor first.")
+                    # WinMain.show()
+
+                
+                checkUnique = 0
+
+            else:
+                ui.statusbar.showMessage("Error: All data must be entered.",10000)
+        
         else:
-            QMessageBox.about(WinMain,"Error","Choosen floor cannot be find in table.Please save the floor first.")
-            # WinMain.show()
-
-<<<<<<< HEAD
-        
-=======
-        makeList()
-        ui.lne_Mass.setEnabled(False)
-        ui.lne_Rigidity.setEnabled(False)
->>>>>>> Ali
-        checkUnique = 0
-
-    else:
-        ui.statusbar.showMessage("Error: All data must be entered.",10000)
+            ui.statusbar.showMessage("Changing process has been cancelled.",10000)
+            WinMain.show()
+    
+    except Exception:
+        QMessageBox.about(WinMain,'Error','Input can only be a number')
+        pass
 
 
 #--------------------SEARCH---------------------#
@@ -239,17 +253,45 @@ def eqfile():
     fileName, _ = QFileDialog.getOpenFileName(WinMain,"Select Earthquake File", "","Text Files (*.txt)", options=options)
     ui.lne_EQData.setText(fileName)
 
-
-#---------------SAVE FILE-----------------#
+#---------------SAVE EXCEL FILE-----------#
 #-----------------------------------------#
-def saveFile():
-    options = QFileDialog.Options()
-    options |= QFileDialog.DontUseNativeDialog
-    savedfileName, _ = QFileDialog.getSaveFileName(WinMain,"QFileDialog.getSaveFileName()","","All Files (*);;Xls Files (*.xls)", options=options)
-    file = open(savedfileName,'w')
-    text = ui.tb_data.toPlainText()
-    file.write(text)
-    file.close()
+def saveExcelFile():
+        options = QFileDialog.Options()
+        options |= QFileDialog.DontUseNativeDialog
+        savedfileName, _ = QFileDialog.getSaveFileName(WinMain,"QFileDialog.getSaveFileName()","","Xlsx Files (*.xlsx)", options=options)
+        if savedfileName.endswith(".xlsx")==True:
+            workbook=xlsxwriter.Workbook(savedfileName)
+        else:
+
+            workbook=xlsxwriter.Workbook(savedfileName+ ".xlsx")
+        worksheet=workbook.add_worksheet()
+        curs.execute("SELECT * FROM sDyna")
+        colnames = [desc[0] for desc in curs.description]
+        data = curs.fetchall()
+
+
+        # Start from the first cell. Rows and columns are zero indexed.
+        row = 1
+        col = 0
+        row1=0
+
+        # Iterate over the data and write it out row by row.
+        
+        for header in range(0,len(colnames)):
+            worksheet.write(row1,col+header,colnames[header])
+        
+
+        for Floor, Mass, Rigidity in (data):
+            worksheet.write(row, col,     Floor)
+            worksheet.write(row, col + 1, Mass)
+            worksheet.write(row, col + 2, Rigidity)
+            row += 1
+
+        workbook.close()
+    
+    
+
+
 
 #---------------SIGNAL-SLOT---------------#
 #-----------------------------------------#
@@ -263,7 +305,7 @@ ui.menuHelp.triggered.connect(about_)
 ui.pb_change.clicked.connect(changeRow)
 ui.cm_Floor.activated.connect(comboact) ########
 ui.pb_fromfile.clicked.connect(eqfile)
-ui.pb_Save.clicked.connect(saveFile)
+ui.pb_Save.clicked.connect(saveExcelFile)
 
 
 
