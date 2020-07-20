@@ -1427,6 +1427,9 @@ class Ui_sDyna(object):
         self.pb_Save = QtWidgets.QPushButton(self.centralwidget)
         self.pb_Save.setGeometry(QtCore.QRect(20, 420, 121, 31))
         self.pb_Save.setObjectName("pb_Save")
+        self.pb_Open = QtWidgets.QPushButton(self.centralwidget)
+        self.pb_Open.setGeometry(QtCore.QRect(670, 380, 121, 31))
+        self.pb_Open.setObjectName("pb_Open")
         sDyna.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(sDyna)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 26))
@@ -1510,6 +1513,8 @@ class Ui_sDyna(object):
         self.pb_change.setText(_translate("sDyna", "CHANGE"))
         self.pb_Save.setToolTip(_translate("sDyna", "Saves your data which you entered."))
         self.pb_Save.setText(_translate("sDyna", "SAVE"))
+        self.pb_Open.setToolTip(_translate("sDyna", "To close the window."))
+        self.pb_Open.setText(_translate("sDyna", "OPEN"))
         self.menuHelp.setTitle(_translate("sDyna", "Help"))
         self.actionAbout.setText(_translate("sDyna", "About"))
 

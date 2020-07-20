@@ -6,6 +6,8 @@ from PyQt5.QtWidgets import *
 from sDynaUi import *
 from about import *
 import xlsxwriter
+import pandas as pd
+import pyodbc
 
 #--------------Create Application--------------#
 #----------------------------------------------#
@@ -256,41 +258,80 @@ def eqfile():
 #---------------SAVE EXCEL FILE-----------#
 #-----------------------------------------#
 def saveExcelFile():
-        options = QFileDialog.Options()
-        options |= QFileDialog.DontUseNativeDialog
-        savedfileName, _ = QFileDialog.getSaveFileName(WinMain,"QFileDialog.getSaveFileName()","","Xlsx Files (*.xlsx)", options=options)
-        if savedfileName.endswith(".xlsx")==True:
-            workbook=xlsxwriter.Workbook(savedfileName)
-        else:
+    options = QFileDialog.Options()
+    options |= QFileDialog.DontUseNativeDialog
+    savedfileName, _ = QFileDialog.getSaveFileName(WinMain,"QFileDialog.getSaveFileName()","","Xlsx Files (*.xlsx)", options=options)
+    if savedfileName.endswith(".xlsx")==True:
+        workbook=xlsxwriter.Workbook(savedfileName)
+    else:
 
-            workbook=xlsxwriter.Workbook(savedfileName+ ".xlsx")
-        worksheet=workbook.add_worksheet()
-        curs.execute("SELECT * FROM sDyna")
-        colnames = [desc[0] for desc in curs.description]
-        data = curs.fetchall()
+        workbook=xlsxwriter.Workbook(savedfileName+ ".xlsx")
+    worksheet=workbook.add_worksheet()
+    curs.execute("SELECT * FROM sDyna")
+    colnames = [desc[0] for desc in curs.description]
+    data = curs.fetchall()
 
 
-        # Start from the first cell. Rows and columns are zero indexed.
-        row = 1
-        col = 0
-        row1=0
+    # Start from the first cell. Rows and columns are zero indexed.
+    row = 1
+    col = 0
+    row1=0
 
-        # Iterate over the data and write it out row by row.
-        
-        for header in range(0,len(colnames)):
-            worksheet.write(row1,col+header,colnames[header])
-        
-
-        for Floor, Mass, Rigidity in (data):
-            worksheet.write(row, col,     Floor)
-            worksheet.write(row, col + 1, Mass)
-            worksheet.write(row, col + 2, Rigidity)
-            row += 1
-
-        workbook.close()
+    # Iterate over the data and write it out row by row.
     
+    for header in range(0,len(colnames)):
+        worksheet.write(row1,col+header,colnames[header])
     
 
+    for Floor, Mass, Rigidity in (data):
+        worksheet.write(row, col,     Floor)
+        worksheet.write(row, col + 1, Mass)
+        worksheet.write(row, col + 2, Rigidity)
+        row += 1
+
+    workbook.close()
+
+#-------------OPEN EXCEL FILE-------------#
+#-----------------------------------------#
+def openExcelFile():
+
+    # Choosing Excel File
+    options = QFileDialog.Options()
+    options |= QFileDialog.DontUseNativeDialog
+    fileName, _ = QFileDialog.getOpenFileName(WinMain,"Select Database", "","Excel Files (*.xlsx)", options=options)
+
+    conn = sqlite3.connect("sDynaDB.db")
+    wb=pd.read_excel(fileName,sheet_name=None)
+    for sheet in wb:
+        wb[sheet].to_sql(sheet,conn, index=False)
+    conn.commit()
+    conn.close()
+
+    makeList()
+
+    
+    # # Import CSV
+    # data = pd.read_excel(fileName, sheet_name=None)  
+    # # data = pd.read_csv (r'C:\Users\Ali Talha Atici\Desktop\123.xlsx')
+    # df = pd.DataFrame(data, columns= ['Floor','Mass','Rigidity'])
+
+    # # Connect to SQL Server
+    # conn = pyodbc.connect('Driver={SQL Server};'
+    #                     'Server=RON\SQLEXPRESS;'
+    #                     'Database=TestDB;'
+    #                     'Trusted_Connection=yes;')
+    # cursor = conn.cursor()
+
+    # # Create Table
+    # curs.execute("CREATE TABLE IF NOT EXISTS sDyna(                     \
+    #             Floor INTEGER NOT NULL PRIMARY KEY,                             \
+    #             Mass INTEGER NOT NULL,                              \
+    #             Rigidity INTEGER NOT NULL)")
+
+    # # Insert DataFrame to Table
+    # for row in df.itertuples():
+    #     curs.execute("INSERT INTO sDyna (Floor, Mass, Rigidity) VALUES (?,?,?)", (row.Floor,row.Mass,row.Rigidity))
+    # conn.commit()
 
 
 #---------------SIGNAL-SLOT---------------#
@@ -306,6 +347,7 @@ ui.pb_change.clicked.connect(changeRow)
 ui.cm_Floor.activated.connect(comboact) ########
 ui.pb_fromfile.clicked.connect(eqfile)
 ui.pb_Save.clicked.connect(saveExcelFile)
+ui.pb_Open.clicked.connect(openExcelFile)
 
 
 
