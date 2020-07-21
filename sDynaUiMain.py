@@ -7,6 +7,9 @@ from sDynaUi import *
 from about import *
 import xlsxwriter
 import xlrd
+from MDOF import *
+import matplotlib.pyplot as plt
+import numpy as np
 
 #--------------Create Application--------------#
 #----------------------------------------------#
@@ -251,7 +254,7 @@ def about_():
 def eqfile():
     options = QFileDialog.Options()
     options |= QFileDialog.DontUseNativeDialog
-    fileName, _ = QFileDialog.getOpenFileName(WinMain,"Select Earthquake File", "","Text Files (*.txt)", options=options)
+    fileName, _ = QFileDialog.getOpenFileName(WinMain,"Select Earthquake File", "","All Files(*);; Text Files (*.txt);; Excel Files (*.xlsx);; CSV Files (*.csv)", options=options)
     ui.lne_EQData.setText(fileName)
 
 #---------------SAVE EXCEL FILE-----------#
@@ -320,6 +323,45 @@ def openExcelFile():
         pass
 
 
+#-------------------RUN-------------------#
+#-----------------------------------------#
+def run():
+    curs.execute("Select Mass From sDyna")
+    massList = curs.fetchall()
+    for i in range(len(massList)):
+        massList[i] = massList[i][0]
+
+    curs.execute("Select Rigidity From sDyna")
+    rigidityList = curs.fetchall()
+    for i in range(len(rigidityList)):
+        rigidityList[i] = rigidityList[i][0]
+    
+    #-----Current Floor Number-----#
+    curs.execute("SELECT COUNT (*) FROM sDyna")
+    floorNumber = curs.fetchone()
+
+    _lne_EQData = ui.lne_EQData.text()
+    _lne_Seperator = ui.lne_Seperator.text()
+
+    #-----------Run MDOF-----------#
+    yapi=Yapi(massList, rigidityList, floorNumber[0])
+
+    yapi.rigidityMatrix()
+    yapi.massMatrix()
+    yapi.naturalFrequency()
+    yapi.dampingRatio(0.05)
+    yapi.dampingMatrix()
+    yapi.amplitudeCalc()
+    yapi.generalMassMat()
+    yapi.generalStiffnessMat()
+    yapi.generalDampingMat()
+    yapi.modeParticipatingFactor()
+    yapi.effectiveParticipatingMass()
+    yapi.earthquakeData(_lne_EQData,_lne_Seperator)
+    yapi.spectra1()
+    yapi.psuedoAcceleration()
+    yapi.baseShear()
+    yapi.baseShearSRSS()
 
 #---------------SIGNAL-SLOT---------------#
 #-----------------------------------------#
@@ -335,6 +377,8 @@ ui.cm_Floor.activated.connect(comboact) ########
 ui.pb_fromfile.clicked.connect(eqfile)
 ui.pb_Save.clicked.connect(saveExcelFile)
 ui.pb_Open.clicked.connect(openExcelFile)
+ui.pb_run.clicked.connect(run)
+
 
 
 

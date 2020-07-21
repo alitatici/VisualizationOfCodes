@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-yapi=Yapi([100,100,100,100], [12800*2,30341*2,30341*2,30341*2], 4)
+yapi=Yapi([100,100,100,100,100], [12800*2,30341*2,30341*2,30341*2,30341*2], 5)
 
 yapi.rigidityMatrix()
 yapi.massMatrix()
