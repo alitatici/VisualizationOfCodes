@@ -1,7 +1,7 @@
 1- Pencere çerçevesini düzenle. 
     1.1- .PNG ekle
     1.2- İsim ekle
-2- Mass ve Rigidity kısmına sadece sayı girilecek. Designerdan düzeltilecek.
+2- eq seperator qt designer'dan düzelt.
 3- Run
 4- Print
     4.1- Print tuşuna basınca kayıt edeceği klasörü seçsin.
@@ -15,3 +15,5 @@ Very last to do list:
 
 python -m PyQt5.uic.pyuic -x sDynaUi.ui -o sDynaUi.py
 
+Hatalar
+1-open'da excel dosyasında string girilme hatası var.

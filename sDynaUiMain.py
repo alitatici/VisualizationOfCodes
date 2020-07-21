@@ -6,10 +6,6 @@ from PyQt5.QtWidgets import *
 from sDynaUi import *
 from about import *
 import xlsxwriter
-import pandas as pd
-import pyodbc
-import openpyxl
-import csv
 import xlrd
 
 #--------------Create Application--------------#

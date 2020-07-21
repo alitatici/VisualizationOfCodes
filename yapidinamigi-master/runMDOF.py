@@ -15,7 +15,7 @@ yapi.generalStiffnessMat()
 yapi.generalDampingMat()
 yapi.modeParticipatingFactor()
 yapi.effectiveParticipatingMass()
-yapi.earthquakeData()
+yapi.earthquakeData("depremkaydi.csv",",")
 yapi.newmark(0.01)
 
 
