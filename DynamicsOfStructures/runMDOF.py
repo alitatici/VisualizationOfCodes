@@ -1,5 +1,6 @@
-from yedi_katli_MDOF1 import *
+from MDOF import *
 import matplotlib.pyplot as plt
+import numpy as np
 
 
 yapi=Yapi([100,100,100,100], [12800*2,30341*2,30341*2,30341*2], 4)
@@ -16,7 +17,11 @@ yapi.generalDampingMat()
 yapi.modeParticipatingFactor()
 yapi.effectiveParticipatingMass()
 yapi.earthquakeData("depremkaydi.csv",",")
-yapi.newmark(0.01)
+yapi.spectra1()
+yapi.psuedoAcceleration()
+yapi.baseShear()
+yapi.baseShearSRSS()
+
 
 
 # plt.plot(a)

@@ -2,8 +2,7 @@ import math
 import numpy as np
 from scipy.linalg import eigh
 
-class Yapi:
-
+class Yapi():
     m=[]
     k=[]
     storeynumber=0
@@ -60,20 +59,20 @@ class Yapi:
             self.Tn[i]=2*math.pi/self.wn[i]
             
     
-        print("wn={}".format(self.wn))
-        print("Tn={}".format(self.Tn))
+#        print("wn={}".format(self.wn))
+#        print("Tn={}".format(self.Tn))
 
-        return
+        return self.Tn
 
     def dampingRatio(self,ksi):
         
-        self.ksi=0
+        self.ksi=ksi
         self.c=np.zeros((self.storeynumber,1))
         for i in range(0,len(self.c)):
             self.c[i]=2*ksi*self.wn[i]*self.m_matrix[i][i]
-        print("c={}".format(self.c))
+        
 
-        return
+        return ksi
     
     def dampingMatrix(self):
         self.c_matrix=np.zeros((self.storeynumber,self.storeynumber))
@@ -129,54 +128,87 @@ class Yapi:
         groundacc=ag_txt[:,1]
         self.ags=groundacc.flatten("C")
         self.t_amount = len(self.ags)
-        print(self.t_amount)
+        return
 
-    def newmark(self, dt):
+    def newmark(self, m, c, k, dt, p, beta, gamma, x0, v0):
         
-         self.dt=dt
-         self.t_amount=len(self.ags)
-         self.beta=1/4
-         self.gamma=1/2
-         x0=0
-         v0=0
-         
-         for i in range(0,self.storeynumber):
-             
-             p= -self.M_Generalized[i][i] * self.ags * 9.806
-             
-             khat= self.K_Generalized[i][i] + self.gamma/(self.beta*self.dt)*self.c + 1/(self.beta*(self.dt**2))*self.M_Generalized[i][i]
-             const1=1/(self.beta*self.dt)*self.M_Generalized[i][i] + self.gamma/self.beta*122.80505021
-             const2=self.M_Generalized[i][i]/(2*self.beta)+self.dt*(self.gamma/(2*self.beta)-1)*122.80505021
-            
-             x=list()
-             v=list()
-             a=list()
-             x[i]=list(np.zeros(self.t_amount))
-             v[i]=list(np.zeros(self.t_amount))
-             a[i]=list(np.zeros(self.t_amount))
-             
-             x[0]=x0
-             v[0]=v0
-             a[0]=(p[0]-122.80505021*v[0]-self.K_Generalized[i][i]*x[0])/self.M_Generalized[i][i]
-            
-             index_array=np.arange(1,self.t_amount)
+        t_amount1 = len(p)
         
-             for j in index_array:
-                 delta_p=p[j]-p[j-1]
-                
-                 delta_phat=delta_p+const1*v[j-1]+const2*a[j-1]
-                
-                 delta_x=delta_phat/khat
-                
-                 delta_v=(self.gamma/(self.beta*dt))*delta_x - self.gamma/self.beta*v[j-1]+self.dt*(1-self.gamma/(2*self.beta))*a[j-1]
-                
-                 delta_a=delta_x/(self.beta*self.dt**2)-v[j-1]/(self.beta*self.dt)-a[j-1]/(2*self.beta)
-                
-                 x[j]=x[j-1]+delta_x
-                 v[j]=v[j-1]+delta_v
-                 a[j]=a[j-1]+delta_a
+        khat= k + gamma/(beta*dt)*c + 1/(beta*(dt**2))*m
+        const1=1/(beta*dt)*m + gamma/beta*c
+        const2=m/(2*beta)+dt*(gamma/(2*beta)-1)*c
     
-         return x,v,a
+        
+        x=np.zeros(t_amount1)
+        v=np.zeros(t_amount1)
+        a=np.zeros(t_amount1)
+        
+        x[0]=x0
+        v[0]=v0
+        a[0]=(p[0]-c*v[0]-k*x[0])/m
+    
+        index_array=np.arange(1,t_amount1)
+    
+        for j in index_array:
+            delta_p=p[j]-p[j-1]
+        
+            delta_phat=delta_p+const1*v[j-1]+const2*a[j-1]
+        
+            delta_x=delta_phat/khat
+        
+            delta_v=(gamma/(beta*dt))*delta_x - gamma/beta*v[j-1]+dt*(1-gamma/(2*beta))*a[j-1]
+        
+            delta_a=delta_x/(beta*dt**2)-v[j-1]/(beta*dt)-a[j-1]/(2*beta)
+        
+            x[j]=x[j-1]+delta_x
+            v[j]=v[j-1]+delta_v
+            a[j]=a[j-1]+delta_a
+
+        return x,v,a
+    
+    def spectra(self,T):
+        
+        dt=0.01
+        pi = np.pi
+        m=1             #kg
+        ksi=Yapi.dampingRatio(self,0.05)        #ksi
+        p = -m * self.ags
+        x0 = 0
+        v0 = 0
+        beta = 1/4
+        gamma = 1/2
+        
+        f=1/T
+        wn=2 * pi * f   #rad/sec
+        k=m*wn**2       #N/m
+        c=2*ksi*wn*m    #unitless
+        x, v, a = Yapi.newmark(self,m, c, k, dt, p, beta, gamma, x0, v0)
+        return max(abs(x)), max(abs(v)), max(abs(a))
+    
+    def spectra1(self):
+        
+        Sd, Sv, Sa=[], [], []
+
+        for i,j in enumerate(Yapi.naturalFrequency(self)):
+            sd , sv , sa= Yapi.spectra(self,j)
+            Sd.append(sd)
+            Sv.append(sv)
+            Sa.append(sa)
+
+#            print("Sd{}={}".format(j,Sd[i]))
+        
+        return Sd
+    
+    def psuedoAcceleration(self):
+        
+        self.Sae=[]
+        
+        for i in range(0,self.storeynumber):
+            sae=Yapi.spectra1(self)[i]*self.wn[i]**2
+            self.Sae.append(sae)
+            
+        
+        return
 
     def modeParticipatingFactor(self):
         self.lx=np.zeros((self.storeynumber,1))
@@ -197,41 +229,24 @@ class Yapi:
             self.M_eff[i]=self.lx[i]**2/self.M_Generalized[i][i]
         
             print("Mx{}={}".format(i,self.M_eff[i]))
-    
-    
-            
-        
-
-
-
-    
-
-    
-    
-        
-        
-        
-        
-        
-            
-        
             
     
+    def baseShear(self):
         
-
-
-            
+        Ft=[]
+        
+        for i in range(0,self.storeynumber):
+            ft=self.M_eff[i]*9.81* self.Sae[i]
+            Ft.append(ft)
+        
+        return Ft
     
-                
-            
-            
+    def baseShearSRSS(self):
         
+        squareFt=[x**2 for x in Yapi.baseShear(self)]
         
-            
-            
+        sumsquareFt=sum(squareFt)
         
-            
+        totalFt=sumsquareFt**0.5
         
-            
-
-    
+        print(totalFt)

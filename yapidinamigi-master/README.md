@@ -1,2 +1,0 @@
-"# Yapi Dinamigi" 
-#ali
