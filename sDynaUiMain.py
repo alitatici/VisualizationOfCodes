@@ -8,6 +8,9 @@ from about import *
 import xlsxwriter
 import pandas as pd
 import pyodbc
+import openpyxl
+import csv
+import xlrd
 
 #--------------Create Application--------------#
 #----------------------------------------------#
@@ -260,13 +263,13 @@ def eqfile():
 def saveExcelFile():
     options = QFileDialog.Options()
     options |= QFileDialog.DontUseNativeDialog
-    savedfileName, _ = QFileDialog.getSaveFileName(WinMain,"QFileDialog.getSaveFileName()","","Xlsx Files (*.xlsx)", options=options)
+    savedfileName, _ = QFileDialog.getSaveFileName(WinMain,"Save File","","Xlsx Files (*.xlsx)", options=options)
     if savedfileName.endswith(".xlsx")==True:
         workbook=xlsxwriter.Workbook(savedfileName)
     else:
 
         workbook=xlsxwriter.Workbook(savedfileName+ ".xlsx")
-    worksheet=workbook.add_worksheet()
+    worksheet=workbook.add_worksheet("sDyna")
     curs.execute("SELECT * FROM sDyna")
     colnames = [desc[0] for desc in curs.description]
     data = curs.fetchall()
@@ -291,6 +294,7 @@ def saveExcelFile():
 
     workbook.close()
 
+
 #-------------OPEN EXCEL FILE-------------#
 #-----------------------------------------#
 def openExcelFile():
@@ -299,39 +303,26 @@ def openExcelFile():
     options = QFileDialog.Options()
     options |= QFileDialog.DontUseNativeDialog
     fileName, _ = QFileDialog.getOpenFileName(WinMain,"Select Database", "","Excel Files (*.xlsx)", options=options)
-
-    conn = sqlite3.connect("sDynaDB.db")
-    wb=pd.read_excel(fileName,sheet_name=None)
-    for sheet in wb:
-        wb[sheet].to_sql(sheet,conn, index=False)
-    conn.commit()
-    conn.close()
-
-    makeList()
-
     
-    # # Import CSV
-    # data = pd.read_excel(fileName, sheet_name=None)  
-    # # data = pd.read_csv (r'C:\Users\Ali Talha Atici\Desktop\123.xlsx')
-    # df = pd.DataFrame(data, columns= ['Floor','Mass','Rigidity'])
+    try: 
+        
+        wb = xlrd.open_workbook(fileName) 
+        sheet = wb.sheet_by_index(0) 
+        sheet.cell_value(0, 0)
+        
+        
+        for i in range(1,sheet.nrows): 
+            floorExcel=sheet.cell_value(i, 0)
+            massExcel=sheet.cell_value(i,1)
+            rigidityExcel=sheet.cell_value(i,2)
+            curs.execute("INSERT INTO sDyna (Floor,Mass,Rigidity) VALUES (?,?,?)", (floorExcel,massExcel,rigidityExcel))
+            conn.commit()
+        
+        makeList()
+    
+    except Exception:
+        pass
 
-    # # Connect to SQL Server
-    # conn = pyodbc.connect('Driver={SQL Server};'
-    #                     'Server=RON\SQLEXPRESS;'
-    #                     'Database=TestDB;'
-    #                     'Trusted_Connection=yes;')
-    # cursor = conn.cursor()
-
-    # # Create Table
-    # curs.execute("CREATE TABLE IF NOT EXISTS sDyna(                     \
-    #             Floor INTEGER NOT NULL PRIMARY KEY,                             \
-    #             Mass INTEGER NOT NULL,                              \
-    #             Rigidity INTEGER NOT NULL)")
-
-    # # Insert DataFrame to Table
-    # for row in df.itertuples():
-    #     curs.execute("INSERT INTO sDyna (Floor, Mass, Rigidity) VALUES (?,?,?)", (row.Floor,row.Mass,row.Rigidity))
-    # conn.commit()
 
 
 #---------------SIGNAL-SLOT---------------#
