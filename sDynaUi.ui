@@ -1853,7 +1853,7 @@ ColorButton::disabled {
      <number>0</number>
     </property>
     <property name="format">
-     <string>Processing %p%</string>
+     <string>Processing %p.pp%</string>
     </property>
    </widget>
   </widget>
