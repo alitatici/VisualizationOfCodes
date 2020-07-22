@@ -13,7 +13,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_sDyna(object):
     def setupUi(self, sDyna):
         sDyna.setObjectName("sDyna")
-        sDyna.resize(805, 525)
+        sDyna.resize(805, 559)
         sDyna.setStyleSheet("/*\n"
 " * The MIT License (MIT)\n"
 " *\n"
@@ -1418,6 +1418,10 @@ class Ui_sDyna(object):
         self.lne_EQData.setGeometry(QtCore.QRect(180, 350, 461, 26))
         self.lne_EQData.setClearButtonEnabled(True)
         self.lne_EQData.setObjectName("lne_EQData")
+        self.progressBar = QtWidgets.QProgressBar(self.centralwidget)
+        self.progressBar.setGeometry(QtCore.QRect(20, 480, 771, 23))
+        self.progressBar.setProperty("value", 0)
+        self.progressBar.setObjectName("progressBar")
         sDyna.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(sDyna)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 805, 26))
@@ -1503,6 +1507,7 @@ class Ui_sDyna(object):
         self.label_5.setText(_translate("sDyna", "Earthquake Data Seperator:"))
         self.lne_Seperator.setPlaceholderText(_translate("sDyna", "Input seperator of your earthquake record, for instance,  \",\" or \".\""))
         self.lne_EQData.setPlaceholderText(_translate("sDyna", "Input only earthquake file."))
+        self.progressBar.setFormat(_translate("sDyna", "Processing %p%"))
         self.menuHelp.setTitle(_translate("sDyna", "Help"))
         self.actionAbout.setText(_translate("sDyna", "About"))
 

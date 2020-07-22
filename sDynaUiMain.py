@@ -5,6 +5,7 @@ from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import *
 from sDynaUi import *
 from about import *
+from results import *
 import xlsxwriter
 import xlrd
 from MDOF import *
@@ -20,8 +21,12 @@ ui.setupUi(WinMain) #tasarımdaki form ile pencereyi birleştir
 WinMain.show() #pencereyi göster.
 
 WinAbout=QDialog()
-ui2 = Ui_Dialog()
-ui2.setupUi(WinAbout)
+uiAbout = Ui_Dialog()
+uiAbout.setupUi(WinAbout)
+
+WinResults = QDialog()
+uiResults = Ui_Results()
+uiResults.setupUi(WinResults)
 
 
 #---------------Create DataBase----------------#
@@ -37,9 +42,9 @@ curs.execute("DELETE FROM sDyna")
 conn.commit()
 
 curs.execute("CREATE TABLE IF NOT EXISTS sDyna(                     \
-                Floor INTEGER NOT NULL PRIMARY KEY,                             \
-                Mass INTEGER NOT NULL,                              \
-                Rigidity INTEGER NOT NULL)")
+                Floor NUMERIC NOT NULL PRIMARY KEY,                             \
+                Mass NUMERIC NOT NULL,                              \
+                Rigidity NUMERIC NOT NULL)")
 conn.commit()
 
 #---------------lineEdit Enable----------------#
@@ -47,6 +52,7 @@ conn.commit()
 
 ui.lne_Mass.setEnabled(False)
 ui.lne_Rigidity.setEnabled(False)
+ui.progressBar.hide()
 
 def comboact():
     ui.lne_Mass.setEnabled(True)
@@ -326,6 +332,7 @@ def openExcelFile():
 #-------------------RUN-------------------#
 #-----------------------------------------#
 def run():
+    
     curs.execute("Select Mass From sDyna")
     massList = curs.fetchall()
     for i in range(len(massList)):
@@ -336,7 +343,7 @@ def run():
     for i in range(len(rigidityList)):
         rigidityList[i] = rigidityList[i][0]
     
-    #-----Current Floor Number-----#
+    #-----Total Floor Number-----#
     curs.execute("SELECT COUNT (*) FROM sDyna")
     floorNumber = curs.fetchone()
 
@@ -357,11 +364,39 @@ def run():
     yapi.generalDampingMat()
     yapi.modeParticipatingFactor()
     yapi.effectiveParticipatingMass()
+    ui.progressBar.setProperty("value", 90)
     yapi.earthquakeData(_lne_EQData,_lne_Seperator)
     yapi.spectra1()
     yapi.psuedoAcceleration()
     yapi.baseShear()
     yapi.baseShearSRSS()
+    ui.progressBar.setProperty("value", 100)
+    
+    WinResults.show()
+    ui.progressBar.hide()
+    ui.progressBar.setProperty("value", 0)
+
+
+
+#--------------ProgressBar----------------#
+#-----------------------------------------#
+def run_():
+    ui.progressBar.show()
+
+    answer4 = QMessageBox.question(WinMain,"Run","Are you sure to run?",\
+                                    QMessageBox.Yes | QMessageBox.No)
+    if answer4 == QMessageBox.Yes:
+        completed = 0
+        while completed < 90:
+            completed += 0.0001
+            ui.progressBar.setValue(completed)
+        run()
+    else:
+        ui.progressBar.hide()
+        ui.statusbar.showMessage("Progress has been cancelled.",10000)
+        WinMain.show()
+    
+
 
 #---------------SIGNAL-SLOT---------------#
 #-----------------------------------------#
@@ -377,7 +412,7 @@ ui.cm_Floor.activated.connect(comboact) ########
 ui.pb_fromfile.clicked.connect(eqfile)
 ui.pb_Save.clicked.connect(saveExcelFile)
 ui.pb_Open.clicked.connect(openExcelFile)
-ui.pb_run.clicked.connect(run)
+ui.pb_run.clicked.connect(run_)
 
 
 
