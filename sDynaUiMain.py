@@ -353,6 +353,11 @@ def run():
     #-----------Run MDOF-----------#
     yapi=Yapi(massList, rigidityList, floorNumber[0])
 
+    completed = 0
+    while completed < 23:
+        completed += 0.0001
+        ui.progressBar.setValue(completed)
+
     yapi.rigidityMatrix()
     yapi.massMatrix()
     yapi.naturalFrequency()
@@ -363,14 +368,26 @@ def run():
     yapi.generalStiffnessMat()
     yapi.generalDampingMat()
     yapi.modeParticipatingFactor()
+
+    while completed < 72:
+        completed += 0.0001
+        ui.progressBar.setValue(completed)
+    
     yapi.effectiveParticipatingMass()
-    ui.progressBar.setProperty("value", 90)
+
+    while completed < 98:
+        completed += 0.0001
+        ui.progressBar.setValue(completed)
+
     yapi.earthquakeData(_lne_EQData,_lne_Seperator)
     yapi.spectra1()
     yapi.psuedoAcceleration()
     yapi.baseShear()
     yapi.baseShearSRSS()
-    ui.progressBar.setProperty("value", 100)
+
+    while completed < 100:
+        completed += 0.0001
+        ui.progressBar.setValue(completed)
     
     WinResults.show()
     ui.progressBar.hide()
@@ -386,10 +403,6 @@ def run_():
     answer4 = QMessageBox.question(WinMain,"Run","Are you sure to run?",\
                                     QMessageBox.Yes | QMessageBox.No)
     if answer4 == QMessageBox.Yes:
-        completed = 0
-        while completed < 90:
-            completed += 0.0001
-            ui.progressBar.setValue(completed)
         run()
     else:
         ui.progressBar.hide()
