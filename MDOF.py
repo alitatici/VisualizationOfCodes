@@ -26,7 +26,7 @@ class Yapi():
             
         # print(self.m_matrix)
             
-        return self.m_matrix
+        return
     
     def rigidityMatrix(self):
         
@@ -43,7 +43,7 @@ class Yapi():
                 self.k_matrix[i][i+1]=-1*self.k[i+1]
                 self.k_matrix[i+1][i]=-1*self.k[i+1]
             
-        print(self.k_matrix)
+        # print(self.k_matrix)
         
         return
     

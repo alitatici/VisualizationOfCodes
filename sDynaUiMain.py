@@ -305,6 +305,8 @@ def saveExcelFile():
 #-----------------------------------------#
 def openExcelFile():
 
+
+    # zaten veri girilmişse verileri resetle ekle
     # Choosing Excel File
     options = QFileDialog.Options()
     options |= QFileDialog.DontUseNativeDialog
@@ -421,6 +423,38 @@ def word():
     import matplotlib.pyplot as plt
     import matplotlib
 
+    #-------Run bof getting results------#
+    curs.execute("Select Mass From sDyna")
+    massList = curs.fetchall()
+    for i in range(len(massList)):
+        massList[i] = massList[i][0]
+    curs.execute("Select Rigidity From sDyna")
+    rigidityList = curs.fetchall()
+    for i in range(len(rigidityList)):
+        rigidityList[i] = rigidityList[i][0]
+    curs.execute("SELECT COUNT (*) FROM sDyna")
+    floorNumber = curs.fetchone()
+    _lne_EQData = ui.lne_EQData.text()
+    _lne_Seperator = ui.lne_Seperator.text()
+    yapi=Yapi(massList, rigidityList, floorNumber[0])
+    yapi.rigidityMatrix()
+    yapi.massMatrix()
+    # yapi.naturalFrequency()
+    # yapi.dampingRatio(0.05)
+    # yapi.dampingMatrix()
+    # yapi.amplitudeCalc()
+    # yapi.generalMassMat()
+    # yapi.generalStiffnessMat()
+    # yapi.generalDampingMat()
+    # yapi.modeParticipatingFactor()  
+    # yapi.effectiveParticipatingMass()
+    # yapi.earthquakeData(_lne_EQData,_lne_Seperator)
+    # yapi.spectra1()
+    # yapi.psuedoAcceleration()
+    # yapi.baseShear()
+    # yapi.baseShearSRSS()
+
+
     #-----Create and edit .docx file-----#
     document=Document()
     header=document.add_heading("sDyna REPORT")
@@ -431,30 +465,45 @@ def word():
     curs.execute("SELECT COUNT (*) FROM sDyna")
     rowNumber = curs.fetchone()
     ArrayNameLocation=math.floor(rowNumber[0]/2)
-    table = document.add_table(rows=rowNumber[0], cols=rowNumber[0]+1)
-    table.allow_autofit = False
+    tableMass = document.add_table(rows=rowNumber[0], cols=rowNumber[0]+1)
+    tableMass.allow_autofit = False
     # table.style = "Table Grid"
     for i in range(1,rowNumber[0]+1):
-        for cell in table.columns[i].cells:
+        for cell in tableMass.columns[i].cells:
             cell.width = Inches(0.5)
 
-    #----------Labeling Matrix-----------#
-    cell = table.cell(ArrayNameLocation, 0)
+    #----------Labeling Mass Matrix-----------#
+    cell = tableMass.cell(ArrayNameLocation, 0)
     cell.width = Inches(1.5)
-    cell.text = 'Mass Matrix(t)='
+    cell.text = 'Mass Matrix(t) ='
     
     #----------Creating Mass Matrix-----------#
-    curs.execute("Select Mass From sDyna")
-    massList = curs.fetchall()
-
+    
     for i in range(0,rowNumber[0]):
         for j in range(0,rowNumber[0]):
-            if i == j: 
-                cell=table.cell(i,j+1)
-                cell.text="{}".format(massList[i][0])
-            else:
-                cell=table.cell(i,j+1)
-                cell.text="0"
+            cell=tableMass.cell(i,j+1)
+            cell.text="{}".format(yapi.m_matrix[i][j])
+
+    document.add_paragraph("\n")
+
+    #----------Labeling Rigidity Matrix-----------#
+    tableRigidity = document.add_table(rows=rowNumber[0], cols=rowNumber[0]+1)
+    tableRigidity.allow_autofit = False
+    for i in range(1,rowNumber[0]+1):
+        for cell in tableRigidity.columns[i].cells:
+            cell.width = Inches(1.1)
+    cell = tableRigidity.cell(ArrayNameLocation, 0)
+    cell.width = Inches(1.8)
+    cell.text = 'Rigidity Matrix(kN/m) ='
+    
+    #----------Creating Rigidity Matrix-----------#
+    
+    for i in range(0,rowNumber[0]):
+        for j in range(0,rowNumber[0]):
+            cell=tableRigidity.cell(i,j+1)
+            cell.text="{}".format(round(yapi.k_matrix[i][j],2))
+
+    
 
 
 
