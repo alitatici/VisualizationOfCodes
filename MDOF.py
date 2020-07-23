@@ -62,7 +62,7 @@ class Yapi():
 #        print("wn={}".format(self.wn))
 #        print("Tn={}".format(self.Tn))
 
-        return self.Tn
+        return
 
     def dampingRatio(self,ksi):
         
@@ -87,7 +87,7 @@ class Yapi():
                 self.c_matrix[i][i+1]=-1*self.c[i+1]
                 self.c_matrix[i+1][i]=-1*self.c[i+1]
         
-        print("c matrix={}".format(self.c_matrix))        
+        # print("c matrix={}".format(self.c_matrix))        
     
     def amplitudeCalc(self):
 
@@ -96,7 +96,7 @@ class Yapi():
         for i in range(0,self.storeynumber):
             self.amp[i]=self.v_amplitude[:,i]/self.v_amplitude[0][i]
         
-            print("amplitude{}={}".format(i+1,self.amp[i]))
+            # print("amplitude{}={}".format(i+1,self.amp[i]))
             
 
         return 
