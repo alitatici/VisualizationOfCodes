@@ -24,9 +24,9 @@ class Yapi():
         for i in range(0,len(self.m)):
             self.m_matrix[i][i]=self.m[i]    
             
-        print(self.m_matrix)
+        # print(self.m_matrix)
             
-        return
+        return self.m_matrix
     
     def rigidityMatrix(self):
         
