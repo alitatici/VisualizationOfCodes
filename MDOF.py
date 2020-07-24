@@ -1,6 +1,8 @@
 import math
 import numpy as np
 from scipy.linalg import eigh
+import matplotlib.pyplot as plt
+import matplotlib.transforms as mtransforms
 
 class Yapi():
     m=[]
@@ -62,7 +64,7 @@ class Yapi():
 #        print("wn={}".format(self.wn))
 #        print("Tn={}".format(self.Tn))
 
-        return
+        return 
 
     def dampingRatio(self,ksi):
         
@@ -189,7 +191,7 @@ class Yapi():
         
         Sd, Sv, Sa=[], [], []
 
-        for i,j in enumerate(Yapi.naturalFrequency(self)):
+        for i,j in enumerate(self.Tn):
             sd , sv , sa= Yapi.spectra(self,j)
             Sd.append(sd)
             Sv.append(sv)
@@ -250,3 +252,21 @@ class Yapi():
         totalFt=sumsquareFt**0.5
         
         print(totalFt)
+
+    def ModalShapes(self):
+        self.amp_fig = np.vstack([ np.zeros(self.storeynumber) , self.amp.T ])
+        fig, axs = plt.subplots(1, self.storeynumber , sharey=True , figsize=(10,5))
+        fig.subplots_adjust(hspace=0)
+        fig.suptitle("Mode Shapes", fontsize=18)
+        
+        for i in range(self.storeynumber):
+            axs[i].plot( np.zeros(self.storeynumber+1) , np.arange(self.storeynumber+1) ,"grey" , marker="o")
+            axs[i].plot( self.amp_fig[:,i], np.arange(self.storeynumber+1) , "r",marker = "o",MS=10)
+            #axs[i].set_title(f"$wn$ = {round(self.wn_matrix[i],2)}Hz & $wd$={wd_matrix[i]}\nT = {round(T[i],2)}sn")
+            axs[i].set_ylim(0)
+            axs[i].grid()
+            axs[i].title.set_text("Mode" + " " +str(i+1))
+        
+        
+
+        

@@ -21,6 +21,7 @@ yapi.spectra1()
 yapi.psuedoAcceleration()
 yapi.baseShear()
 yapi.baseShearSRSS()
+yapi.ModalShapes()
 
 
 

@@ -12,6 +12,7 @@ from MDOF import *
 import matplotlib.pyplot as plt
 import numpy as np
 from word1 import *
+import os
 
 #--------------Create Application--------------#
 #----------------------------------------------#
@@ -418,7 +419,7 @@ def run_():
 def word():
 
     from docx import Document
-    from docx.shared import Inches
+    from docx.shared import Inches, Pt
     import numpy as np
     import matplotlib.pyplot as plt
     import matplotlib
@@ -443,6 +444,7 @@ def word():
     yapi.dampingRatio(0.05)
     yapi.dampingMatrix()
     yapi.amplitudeCalc()
+    yapi.ModalShapes()
     # yapi.generalMassMat()
     # yapi.generalStiffnessMat()
     # yapi.generalDampingMat()
@@ -453,6 +455,7 @@ def word():
     # yapi.psuedoAcceleration()
     # yapi.baseShear()
     # yapi.baseShearSRSS()
+    
 
 
     #-----Create and edit .docx file-----#
@@ -483,6 +486,14 @@ def word():
         for j in range(0,rowNumber[0]):
             cell=tableMass.cell(i,j+1)
             cell.text="{}".format(yapi.m_matrix[i][j])
+    
+    for row in tableMass.rows:
+        for cell in row.cells:
+            paragraphs = cell.paragraphs
+            for paragraph in paragraphs:
+                for run in paragraph.runs:
+                    font = run.font
+                    font.size= Pt(9)
 
     document.add_paragraph("\n")
 
@@ -502,6 +513,14 @@ def word():
         for j in range(0,rowNumber[0]):
             cell=tableRigidity.cell(i,j+1)
             cell.text="{}".format(round(yapi.k_matrix[i][j],2))
+    
+    for row in tableRigidity.rows:
+        for cell in row.cells:
+            paragraphs = cell.paragraphs
+            for paragraph in paragraphs:
+                for run in paragraph.runs:
+                    font = run.font
+                    font.size= Pt(9)
     
     #----------Creating Natural Frequency-----------#
     document.add_paragraph("")
@@ -533,8 +552,16 @@ def word():
             cell=tableDamping.cell(i,j+1)
             cell.text="{}".format(round(yapi.c_matrix[i][j],2))
     
+    for row in tableDamping.rows:
+        for cell in row.cells:
+            paragraphs = cell.paragraphs
+            for paragraph in paragraphs:
+                for run in paragraph.runs:
+                    font = run.font
+                    font.size= Pt(9)
+    
     #----------Amplitudes-----------#
-    document.add_paragraph("")
+    document.add_page_break()
     document.add_heading("Mode 1 Amplitude",level=1 )
     tableAmplitude=document.add_table(rows=rowNumber[0],cols=rowNumber[0])
     for i in range(0,rowNumber[0]):
@@ -545,6 +572,19 @@ def word():
             sub_text.font.subscript=True
             a.add_run(" = {}".format(round(yapi.amp[i][j],3)))
             tableAmplitude.allow_autofit=False
+    
+    for row in tableAmplitude.rows:
+        for cell in row.cells:
+            paragraphs = cell.paragraphs
+            for paragraph in paragraphs:
+                for run in paragraph.runs:
+                    font = run.font
+                    font.size= Pt(9)
+
+    #----------Mode Shapes-----------#
+    plt.savefig("ModeShapes.png")
+    document.add_picture("ModeShapes.png",width=Inches(6),height=Inches(3))
+    os.remove("ModeShapes.png")
 
 
 
