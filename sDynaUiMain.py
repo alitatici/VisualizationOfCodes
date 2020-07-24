@@ -423,6 +423,7 @@ def word():
     import numpy as np
     import matplotlib.pyplot as plt
     import matplotlib
+    from docx.enum.table import WD_TABLE_ALIGNMENT
 
     #-------Run bof getting results------#
     curs.execute("Select Mass From sDyna")
@@ -445,14 +446,14 @@ def word():
     yapi.dampingMatrix()
     yapi.amplitudeCalc()
     yapi.ModalShapes()
-    # yapi.generalMassMat()
-    # yapi.generalStiffnessMat()
-    # yapi.generalDampingMat()
-    # yapi.modeParticipatingFactor()  
-    # yapi.effectiveParticipatingMass()
-    # yapi.earthquakeData(_lne_EQData,_lne_Seperator)
-    # yapi.spectra1()
-    # yapi.psuedoAcceleration()
+    yapi.generalMassMat()
+    yapi.generalStiffnessMat()
+    yapi.generalDampingMat()
+    yapi.modeParticipatingFactor()  
+    yapi.effectiveParticipatingMass()
+    yapi.earthquakeData(_lne_EQData,_lne_Seperator)
+    yapi.spectra1()
+    yapi.psuedoAcceleration()
     # yapi.baseShear()
     # yapi.baseShearSRSS()
     
@@ -468,6 +469,8 @@ def word():
     curs.execute("SELECT COUNT (*) FROM sDyna")
     rowNumber = curs.fetchone()
     ArrayNameLocation=math.floor(rowNumber[0]/2)
+
+    #--------Mass Matrix--------#
     tableMass = document.add_table(rows=rowNumber[0], cols=rowNumber[0]+1)
     tableMass.allow_autofit = False
     # table.style = "Table Grid"
@@ -525,14 +528,27 @@ def word():
     #----------Creating Natural Frequency-----------#
     document.add_paragraph("")
     for i in range(0,rowNumber[0]):
-        p=document.add_paragraph("ω")
-        p.add_run("")
+        p=document.add_paragraph("")
+        a = p.add_run("ω")
+        font = a.font
+        font.size = Pt(9)
         sub_p=p.add_run("{}".format(i+1))
         sub_p.font.subscript=True
-        p.add_run(" = {} rad/sec           --------------->     T".format(round(yapi.wn[i][0],3)))
+        font = sub_p.font
+        font.size = Pt(9)
+        b = p.add_run(" = {} rad/sec           --------------->     T".format(round(yapi.wn[i][0],3)))
+        font = b.font
+        font.size = Pt(9)
         sub_p=p.add_run("{}".format(i+1))
-        p.add_run("= {} sec".format(round(yapi.Tn[i][0],3)))
+        font = sub_p.font
+        font.size = Pt(9)
+        c = p.add_run("= {} sec".format(round(yapi.Tn[i][0],3)))
+        font = c.font
+        font.size = Pt(9)
         sub_p.font.subscript=True
+        
+        
+
     
     #----------Labeling Damping Matrix-----------#
     document.add_paragraph("")
@@ -564,6 +580,7 @@ def word():
     document.add_page_break()
     document.add_heading("Mode 1 Amplitude",level=1 )
     tableAmplitude=document.add_table(rows=rowNumber[0],cols=rowNumber[0])
+    
     for i in range(0,rowNumber[0]):
         for j in range(0,rowNumber[0]):
             cell=tableAmplitude.cell(i,j)
@@ -571,9 +588,10 @@ def word():
             sub_text=a.add_run("{}{}".format(i+1,j+1))
             sub_text.font.subscript=True
             a.add_run(" = {}".format(round(yapi.amp[i][j],3)))
+            
             tableAmplitude.allow_autofit=False
-    
     for row in tableAmplitude.rows:
+        row.height = Inches(0.5)
         for cell in row.cells:
             paragraphs = cell.paragraphs
             for paragraph in paragraphs:
@@ -582,19 +600,105 @@ def word():
                     font.size= Pt(9)
 
     #----------Mode Shapes-----------#
+    document.add_paragraph("")
     plt.savefig("ModeShapes.png")
     document.add_picture("ModeShapes.png",width=Inches(6),height=Inches(3))
     os.remove("ModeShapes.png")
 
+    #----------Generalized Mass Matrix-----------#
+    document.add_paragraph("")
+    tableGenMass = document.add_table(rows=rowNumber[0], cols=rowNumber[0]+1)
+    tableGenMass.allow_autofit = False
+    for i in range(1,rowNumber[0]+1):
+        for cell in tableGenMass.columns[i].cells:
+            cell.width = Inches(0.5)
+    cell = tableGenMass.cell(ArrayNameLocation, 0)
+    cell.width = Inches(1.5)
+    cell.text = 'M ='
+    
+    #----------Creating Generalized Mass Matrix-----------#
+    
+    for i in range(0,rowNumber[0]):
+        for j in range(0,rowNumber[0]):
+            cell=tableGenMass.cell(i,j+1)
+            cell.text="{}".format(round(yapi.M_Generalized[i][j],2))
+    
+    for row in tableGenMass.rows:
+        for cell in row.cells:
+            paragraphs = cell.paragraphs
+            for paragraph in paragraphs:
+                for run in paragraph.runs:
+                    font = run.font
+                    font.size= Pt(9)
 
+#----------Generalized Stiffness Matrix-----------#
+    document.add_paragraph("")
+    tableGenStiffness = document.add_table(rows=rowNumber[0], cols=rowNumber[0]+1)
+    tableGenStiffness.allow_autofit = False
+    for i in range(1,rowNumber[0]+1):
+        for cell in tableGenStiffness.columns[i].cells:
+            cell.width = Inches(0.5)
+    cell = tableGenStiffness.cell(ArrayNameLocation, 0)
+    cell.width = Inches(1.5)
+    cell.text = 'K ='
+    
+    #----------Creating Generalized Stiffness Matrix-----------#
+    
+    for i in range(0,rowNumber[0]):
+        for j in range(0,rowNumber[0]):
+            cell=tableGenStiffness.cell(i,j+1)
+            cell.text="{}".format(round(yapi.K_Generalized[i][j],2))
+    
+    for row in tableGenStiffness.rows:
+        for cell in row.cells:
+            paragraphs = cell.paragraphs
+            for paragraph in paragraphs:
+                for run in paragraph.runs:
+                    font = run.font
+                    font.size= Pt(9)
+
+    #----------Generalized Damping Matrix-----------#
+    document.add_paragraph("")
+    tableGenDamping = document.add_table(rows=rowNumber[0], cols=rowNumber[0]+1)
+    tableGenDamping.allow_autofit = False
+    for i in range(1,rowNumber[0]+1):
+        for cell in tableGenDamping.columns[i].cells:
+            cell.width = Inches(0.5)
+    cell = tableGenDamping.cell(ArrayNameLocation, 0)
+    cell.width = Inches(1.5)
+    cell.text = 'C ='
+    
+    #----------Creating Generalized Damping Matrix-----------#
+    
+    for i in range(0,rowNumber[0]):
+        for j in range(0,rowNumber[0]):
+            cell=tableGenDamping.cell(i,j+1)
+            cell.text="{}".format(round(yapi.C_Generalized[i][j],2))
+    
+    for row in tableGenDamping.rows:
+        for cell in row.cells:
+            paragraphs = cell.paragraphs
+            for paragraph in paragraphs:
+                for run in paragraph.runs:
+                    font = run.font
+                    font.size= Pt(9)
 
     
-
-    
-
-
-    
-
+    #----------MODAL PARTICIPATING FACTOR FOR EACH MODES-----------#
+    document.add_paragraph("")
+    for i in range(0,rowNumber[0]):
+        p=document.add_paragraph("")
+        a = p.add_run("Γ")
+        font = a.font
+        font.size = Pt(9)
+        sub_p=p.add_run("x{}".format(i+1))
+        sub_p.font.subscript=True
+        font = sub_p.font
+        font.size = Pt(9)
+        b = p.add_run(" = {} ".format(round(yapi.lam[i][0],3)))
+        font = b.font
+        font.size = Pt(9)
+        sub_p.font.subscript=True
 
 
 

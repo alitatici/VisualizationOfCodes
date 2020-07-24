@@ -107,21 +107,21 @@ class Yapi():
         self.M_Generalized=np.zeros((self.storeynumber, self.storeynumber))
         for i in range(0,self.storeynumber):
             self.M_Generalized[i][i] =np.dot(np.dot(self.amp[i], self.m_matrix) ,self.amp[i].reshape(self.storeynumber,1))
-        print("M Generalized=\n{}".format(self.M_Generalized))
+        # print("M Generalized=\n{}".format(self.M_Generalized))
      
         return
     def generalStiffnessMat(self):
         self.K_Generalized=np.zeros((self.storeynumber,self.storeynumber))
         for i in range(0,self.storeynumber):
             self.K_Generalized[i][i]=self.wn_matrix[i]*self.M_Generalized[i][i]
-        print("K Generalized=\n{}".format(self.K_Generalized))
+        # print("K Generalized=\n{}".format(self.K_Generalized))
         return
 
     def generalDampingMat(self):
         self.C_Generalized=np.zeros((self.storeynumber,self.storeynumber))
         for i in range(0,self.storeynumber):
             self.C_Generalized[i][i]=np.dot(np.dot(self.amp[i], self.c_matrix),self.amp[i].reshape(self.storeynumber,1))
-        print("C Generalized=\n{}".format(self.C_Generalized))
+        # print("C Generalized=\n{}".format(self.C_Generalized))
         return
     
     def earthquakeData(self,file_use_nail,delimiter_use_nail):
