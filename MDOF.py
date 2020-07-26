@@ -127,9 +127,19 @@ class Yapi():
     def earthquakeData(self,file_use_nail,delimiter_use_nail):
         
         ag_txt = np.loadtxt(file_use_nail, delimiter=delimiter_use_nail)
+        time=ag_txt[:,0]
         groundacc=ag_txt[:,1]
         self.ags=groundacc.flatten("C")
         self.t_amount = len(self.ags)
+        fig, ax = plt.subplots(1, 1)
+        fig.subplots_adjust(hspace=0)
+        fig.suptitle("Earthquake Data", fontsize=18)
+        dt=time[1]-time[0]
+        t = np.arange(time[0], time[-1]+dt, dt)
+        ax.plot(t, self.ags)
+        ax.set_ylabel("Acceleration (cm/sec^2)")
+        ax.set_xlabel("Time(sec)")
+        plt.show()
         return
 
     def newmark(self, m, c, k, dt, p, beta, gamma, x0, v0):
@@ -221,7 +231,7 @@ class Yapi():
         for i in range(0,self.storeynumber):
             self.lam[i]=self.lx[i]/self.M_Generalized[i][i]
         
-        print(self.lam)        
+        # print(self.lam)        
         return
     
     def effectiveParticipatingMass(self):
