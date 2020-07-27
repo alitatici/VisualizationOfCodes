@@ -6,7 +6,8 @@
     4.1- Print tuşuna basınca kayıt edeceği klasörü seçsin.
 5- Save de cancel hatası
 6-Open ın başına reset all yap
-7-Grafikleri ayrı ayrı al
+7-Grafikleri ayrı ayrı al(mode shapes)
+8-Her birine başlık at
 
 
 Very last to do list:

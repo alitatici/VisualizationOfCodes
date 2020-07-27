@@ -127,28 +127,29 @@ class Yapi():
     def earthquakeData(self,file_use_nail,delimiter_use_nail):
         
         ag_txt = np.loadtxt(file_use_nail, delimiter=delimiter_use_nail)
-        time=ag_txt[:,0]
+        self.time=ag_txt[:,0]
         groundacc=ag_txt[:,1]
         self.ags=groundacc.flatten("C")
         self.t_amount = len(self.ags)
         fig, ax = plt.subplots(1, 1)
         fig.subplots_adjust(hspace=0)
         fig.suptitle("Earthquake Data", fontsize=18)
-        dt=time[1]-time[0]
-        t = np.arange(time[0], time[-1]+dt, dt)
+        self.dt=self.time[1]-self.time[0]
+        t = np.arange(self.time[0], self.time[-1]+self.dt, self.dt)
         ax.plot(t, self.ags)
         ax.set_ylabel("Acceleration (cm/sec^2)")
         ax.set_xlabel("Time(sec)")
-        plt.show()
+        plt.savefig("EarthquakeData.png")
         return
 
-    def newmark(self, m, c, k, dt, p, beta, gamma, x0, v0):
+    def newmark(self, m, c, k, dt1, p, beta, gamma, x0, v0):
         
+        dt1=self.dt
         t_amount1 = len(p)
         
-        khat= k + gamma/(beta*dt)*c + 1/(beta*(dt**2))*m
-        const1=1/(beta*dt)*m + gamma/beta*c
-        const2=m/(2*beta)+dt*(gamma/(2*beta)-1)*c
+        khat= k + gamma/(beta*dt1)*c + 1/(beta*(dt1**2))*m
+        const1=1/(beta*dt1)*m + gamma/beta*c
+        const2=m/(2*beta)+dt1*(gamma/(2*beta)-1)*c
     
         
         x=np.zeros(t_amount1)
@@ -168,9 +169,9 @@ class Yapi():
         
             delta_x=delta_phat/khat
         
-            delta_v=(gamma/(beta*dt))*delta_x - gamma/beta*v[j-1]+dt*(1-gamma/(2*beta))*a[j-1]
+            delta_v=(gamma/(beta*dt1))*delta_x - gamma/beta*v[j-1]+dt1*(1-gamma/(2*beta))*a[j-1]
         
-            delta_a=delta_x/(beta*dt**2)-v[j-1]/(beta*dt)-a[j-1]/(2*beta)
+            delta_a=delta_x/(beta*dt1**2)-v[j-1]/(beta*dt1)-a[j-1]/(2*beta)
         
             x[j]=x[j-1]+delta_x
             v[j]=v[j-1]+delta_v
@@ -180,7 +181,7 @@ class Yapi():
     
     def spectra(self,T):
         
-        dt=0.01
+        dt=self.dt
         pi = np.pi
         m=1             #kg
         ksi=Yapi.dampingRatio(self,0.05)        #ksi
@@ -206,6 +207,8 @@ class Yapi():
             Sd.append(sd)
             Sv.append(sv)
             Sa.append(sa)
+
+
 
 #            print("Sd{}={}".format(j,Sd[i]))
         
@@ -240,7 +243,7 @@ class Yapi():
         for i in range(0,self.storeynumber):
             self.M_eff[i]=self.lx[i]**2/self.M_Generalized[i][i]
         
-            print("Mx{}={}".format(i,self.M_eff[i]))
+            # print("Mx{}={}".format(i,self.M_eff[i]))
             
     
     def baseShear(self):
@@ -277,6 +280,4 @@ class Yapi():
             axs[i].grid()
             axs[i].title.set_text("Mode" + " " +str(i+1))
         
-        
-
-        
+        plt.savefig("ModeShapes.png")

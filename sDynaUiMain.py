@@ -450,8 +450,8 @@ def word():
     yapi.generalStiffnessMat()
     yapi.generalDampingMat()
     yapi.modeParticipatingFactor()  
-    # yapi.effectiveParticipatingMass()
-    # yapi.earthquakeData(_lne_EQData,_lne_Seperator)
+    yapi.effectiveParticipatingMass()
+    yapi.earthquakeData(_lne_EQData,_lne_Seperator)
     # yapi.spectra1()
     # yapi.psuedoAcceleration()
     # yapi.baseShear()
@@ -601,7 +601,6 @@ def word():
 
     #----------Mode Shapes-----------#
     document.add_paragraph("")
-    plt.savefig("ModeShapes.png")
     document.add_picture("ModeShapes.png",width=Inches(6),height=Inches(3))
     os.remove("ModeShapes.png")
 
@@ -699,6 +698,33 @@ def word():
         font = b.font
         font.size = Pt(9)
         sub_p.font.subscript=True
+    
+    #----------Effective Participating Mass Of Each Modes-----------#
+    document.add_paragraph("")
+    for i in range(0,rowNumber[0]):
+        p=document.add_paragraph("")
+        a = p.add_run("M")
+        font = a.font
+        font.size = Pt(9)
+        sub_p=p.add_run("x{}".format(i+1))
+        sub_p.font.subscript=True
+        font = sub_p.font
+        font.size = Pt(9)
+        b = p.add_run(" = {} ".format(round(yapi.M_eff[i][0],3)))
+        font = b.font
+        font.size = Pt(9)
+        sub_p.font.subscript=True
+    
+    #----------Earthquake Acceleration Data-----------#
+    document.add_paragraph("")
+    document.add_picture("EarthquakeData.png")
+    os.remove("EarthquakeData.png")
+
+    #----------Earthquake Acceleration Data-----------#
+
+    
+
+
 
 
 
