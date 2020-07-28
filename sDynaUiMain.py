@@ -452,10 +452,11 @@ def word():
     yapi.modeParticipatingFactor()  
     yapi.effectiveParticipatingMass()
     yapi.earthquakeData(_lne_EQData,_lne_Seperator)
-    # yapi.spectra1()
-    # yapi.psuedoAcceleration()
-    # yapi.baseShear()
-    # yapi.baseShearSRSS()
+    yapi.spectra2()
+    yapi.spectra1()
+    yapi.psuedoAcceleration()
+    yapi.baseShear()
+    yapi.baseShearSRSS()
     
 
 
@@ -720,7 +721,64 @@ def word():
     document.add_picture("EarthquakeData.png")
     os.remove("EarthquakeData.png")
 
-    #----------Earthquake Acceleration Data-----------#
+    #----------Psuedo Displacement Respond Spectrum-----------#
+    document.add_paragraph("")
+    document.add_picture("PseudoDisplacement.png")
+    os.remove("PseudoDisplacement.png")
+    document.add_paragraph("")
+    document.add_picture("PseudoAcceleration.png")
+    os.remove("PseudoAcceleration.png")
+
+
+    #----------Psuedo Acceleration Respond Spectrum-----------#
+    document.add_paragraph("")
+    for i in range(0,rowNumber[0]):
+        p=document.add_paragraph("")
+        a = p.add_run("S")
+        font = a.font
+        font.size = Pt(11)
+        sub_p=p.add_run("ae{}".format(i+1))
+        sub_p.font.subscript=True
+        font = sub_p.font
+        font.size = Pt(11)
+        b = p.add_run(" = {} ".format(round(yapi.Sae[i][0],3)))
+        font = b.font
+        font.size = Pt(11)
+        sub_p.font.subscript=True
+    
+    #----------Mode's Base Shear Forces-----------#
+    document.add_paragraph("")
+    for i in range(0,rowNumber[0]):
+        p=document.add_paragraph("")
+        a = p.add_run("V")
+        font = a.font
+        font.size = Pt(11)
+        sub_p=p.add_run("x{}".format(i+1))
+        sub_p.font.subscript=True
+        font = sub_p.font
+        font.size = Pt(11)
+        b = p.add_run(" = {} ".format(round(yapi.Ft[i][0],3)))
+        font = b.font
+        font.size = Pt(11)
+        sub_p.font.subscript=True
+    
+    #----------Estimation of Base Shear Force with SRSS method-----------#
+    document.add_paragraph("")
+    p=document.add_paragraph("")
+    a = p.add_run("V")
+    font = a.font
+    font.size = Pt(11)
+    sub_p=p.add_run("T")
+    sub_p.font.subscript=True
+    font = sub_p.font
+    font.size = Pt(11)
+    b = p.add_run(" = {} ".format(round(yapi.totalFt[0],3)))
+    font = b.font
+    font.size = Pt(11)
+    sub_p.font.subscript=True
+
+
+
 
     
 

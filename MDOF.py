@@ -214,6 +214,34 @@ class Yapi():
         
         return Sd
     
+    def spectra2(self):
+        Sd, Sv, Sa=[], [], []
+
+        for i in np.arange(0.01,4,0.01):
+            sd , sv , sa = Yapi.spectra(self,i)
+            Sd.append(sd)
+            Sv.append(sv)
+            Sa.append(sa)
+
+        plt.figure()
+        plt.plot(np.arange(0.01,4,0.01),Sd)
+        ax0 = plt.gca()
+        ax0.grid(True)
+        ax0.legend()
+        plt.xlabel("Tn(s)")
+        plt.ylabel("x (cm)")
+        plt.title("Displacement Response Spectrum")
+        plt.savefig("PseudoDisplacement.png")
+        plt.figure()
+        plt.plot(np.arange(0.01,4,0.01),Sa)
+        ax0 = plt.gca()
+        ax0.grid(True)
+        ax0.legend()
+        plt.xlabel("Tn(s)")
+        plt.ylabel("A (g)")
+        plt.title("Acceleration Response Spectrum")
+        plt.savefig("PseudoAcceleration.png")
+    
     def psuedoAcceleration(self):
         
         self.Sae=[]
@@ -221,7 +249,6 @@ class Yapi():
         for i in range(0,self.storeynumber):
             sae=Yapi.spectra1(self)[i]*self.wn[i]**2
             self.Sae.append(sae)
-            
         
         return
 
@@ -248,23 +275,23 @@ class Yapi():
     
     def baseShear(self):
         
-        Ft=[]
+        self.Ft=[]
         
         for i in range(0,self.storeynumber):
             ft=self.M_eff[i]*9.81* self.Sae[i]
-            Ft.append(ft)
+            self.Ft.append(ft)
         
-        return Ft
+        return
     
     def baseShearSRSS(self):
         
-        squareFt=[x**2 for x in Yapi.baseShear(self)]
+        squareFt=[x**2 for x in self.Ft]
         
         sumsquareFt=sum(squareFt)
         
-        totalFt=sumsquareFt**0.5
+        self.totalFt=sumsquareFt**0.5
         
-        print(totalFt)
+        # print(self.totalFt)
 
     def ModalShapes(self):
         self.amp_fig = np.vstack([ np.zeros(self.storeynumber) , self.amp.T ])

@@ -17,12 +17,12 @@ yapi.generalDampingMat()
 yapi.modeParticipatingFactor()
 yapi.effectiveParticipatingMass()
 yapi.earthquakeData("depremkaydi.csv",",")
+yapi.spectra2()
 yapi.spectra1()
 yapi.psuedoAcceleration()
 yapi.baseShear()
 yapi.baseShearSRSS()
 yapi.ModalShapes()
-
 
 
 # plt.plot(a)
