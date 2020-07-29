@@ -1,7 +1,7 @@
 1- Pencere çerçevesini düzenle. 
     1.1- .PNG ekle
     1.2- İsim ekle
-3- Run - Pencere açtır
+3- Run - Pencere açtır.
 4- Print
     4.1- Print tuşuna basınca kayıt edeceği klasörü seçsin.
 5- Save de cancel hatası
