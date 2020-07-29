@@ -13,9 +13,9 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_sDyna(object):
     def setupUi(self, sDyna):
         sDyna.setObjectName("sDyna")
-        sDyna.resize(805, 809)
-        sDyna.setMinimumSize(QtCore.QSize(805, 809))
-        sDyna.setMaximumSize(QtCore.QSize(805, 809))
+        sDyna.resize(1317, 555)
+        sDyna.setMinimumSize(QtCore.QSize(1317, 555))
+        sDyna.setMaximumSize(QtCore.QSize(1317, 555))
         sDyna.setStyleSheet("/*\n"
 " * The MIT License (MIT)\n"
 " *\n"
@@ -1425,11 +1425,15 @@ class Ui_sDyna(object):
         self.progressBar.setProperty("value", 0)
         self.progressBar.setObjectName("progressBar")
         self.txt_Results = QtWidgets.QTextEdit(self.centralwidget)
-        self.txt_Results.setGeometry(QtCore.QRect(20, 510, 771, 241))
+        self.txt_Results.setGeometry(QtCore.QRect(810, 0, 501, 501))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.txt_Results.setFont(font)
+        self.txt_Results.setReadOnly(True)
         self.txt_Results.setObjectName("txt_Results")
         sDyna.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(sDyna)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 805, 26))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 1317, 26))
         self.menubar.setObjectName("menubar")
         self.menuHelp = QtWidgets.QMenu(self.menubar)
         self.menuHelp.setObjectName("menuHelp")
@@ -1520,7 +1524,12 @@ class Ui_sDyna(object):
         self.label_5.setText(_translate("sDyna", "Earthquake Data Seperator:"))
         self.lne_Seperator.setPlaceholderText(_translate("sDyna", "Input seperator of your earthquake record, for instance,  \",\" or \".\""))
         self.lne_EQData.setPlaceholderText(_translate("sDyna", "Input earthquake file which only has time and acceleration data."))
-        self.progressBar.setFormat(_translate("sDyna", "Processing %p.pp%"))
+        self.progressBar.setFormat(_translate("sDyna", "Processing %p.00%"))
+        self.txt_Results.setHtml(_translate("sDyna", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:10pt; font-weight:400; font-style:normal;\">\n"
+"<p align=\"center\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:7.8pt;\"><br /></p></body></html>"))
         self.menuHelp.setTitle(_translate("sDyna", "Help"))
         self.actionAbout.setText(_translate("sDyna", "About"))
 

@@ -24,7 +24,10 @@ class Yapi():
             
         self.m_matrix=np.zeros((self.storeynumber,self.storeynumber))
         for i in range(0,len(self.m)):
-            self.m_matrix[i][i]=self.m[i]    
+            self.m_matrix[i][i]=self.m[i]
+        
+        self.m_matrix=self.m_matrix.round(2)
+            
             
         # print(self.m_matrix)
             
@@ -44,7 +47,8 @@ class Yapi():
             if i < len(self.k)-1:
                 self.k_matrix[i][i+1]=-1*self.k[i+1]
                 self.k_matrix[i+1][i]=-1*self.k[i+1]
-            
+        
+        self.k_matrix=self.k_matrix.round(2)
         # print(self.k_matrix)
         
         return
@@ -60,7 +64,8 @@ class Yapi():
             self.wn[i]=math.sqrt(self.wn_matrix[i])
             self.Tn[i]=2*math.pi/self.wn[i]
             
-    
+            self.wn[i]=self.wn[i].round(2)
+            self.Tn[i]=self.Tn[i].round(2)
 #        print("wn={}".format(self.wn))
 #        print("Tn={}".format(self.Tn))
 
@@ -88,7 +93,7 @@ class Yapi():
             if i < len(self.k)-1:
                 self.c_matrix[i][i+1]=-1*self.c[i+1]
                 self.c_matrix[i+1][i]=-1*self.c[i+1]
-        
+        self.c_matrix=self.c_matrix.round(2)
         # print("c matrix={}".format(self.c_matrix))        
     
     def amplitudeCalc(self):
@@ -97,6 +102,7 @@ class Yapi():
 
         for i in range(0,self.storeynumber):
             self.amp[i]=self.v_amplitude[:,i]/self.v_amplitude[0][i]
+            self.amp[i]=self.amp[i].round(2)
         
             # print("amplitude{}={}".format(i+1,self.amp[i]))
             
@@ -107,6 +113,7 @@ class Yapi():
         self.M_Generalized=np.zeros((self.storeynumber, self.storeynumber))
         for i in range(0,self.storeynumber):
             self.M_Generalized[i][i] =np.dot(np.dot(self.amp[i], self.m_matrix) ,self.amp[i].reshape(self.storeynumber,1))
+            self.M_Generalized[i][i]=round(self.M_Generalized[i][i],2)
         # print("M Generalized=\n{}".format(self.M_Generalized))
      
         return
@@ -114,6 +121,7 @@ class Yapi():
         self.K_Generalized=np.zeros((self.storeynumber,self.storeynumber))
         for i in range(0,self.storeynumber):
             self.K_Generalized[i][i]=self.wn_matrix[i]*self.M_Generalized[i][i]
+            self.K_Generalized[i][i]=round(self.K_Generalized[i][i],2)
         # print("K Generalized=\n{}".format(self.K_Generalized))
         return
 
@@ -121,6 +129,7 @@ class Yapi():
         self.C_Generalized=np.zeros((self.storeynumber,self.storeynumber))
         for i in range(0,self.storeynumber):
             self.C_Generalized[i][i]=np.dot(np.dot(self.amp[i], self.c_matrix),self.amp[i].reshape(self.storeynumber,1))
+            self.C_Generalized[i][i]=round(self.C_Generalized[i][i],2)
         # print("C Generalized=\n{}".format(self.C_Generalized))
         return
     
@@ -217,14 +226,14 @@ class Yapi():
     def spectra2(self):
         Sd, Sv, Sa=[], [], []
 
-        for i in np.arange(0.01,4,0.01):
+        for i in np.arange(0.1,4,0.1):
             sd , sv , sa = Yapi.spectra(self,i)
             Sd.append(sd)
             Sv.append(sv)
             Sa.append(sa)
 
         plt.figure()
-        plt.plot(np.arange(0.01,4,0.01),Sd)
+        plt.plot(np.arange(0.1,4,0.1),Sd)
         ax0 = plt.gca()
         ax0.grid(True)
         ax0.legend()
@@ -233,7 +242,7 @@ class Yapi():
         plt.title("Displacement Response Spectrum")
         plt.savefig("PseudoDisplacement.png")
         plt.figure()
-        plt.plot(np.arange(0.01,4,0.01),Sa)
+        plt.plot(np.arange(0.1,4,0.1),Sa)
         ax0 = plt.gca()
         ax0.grid(True)
         ax0.legend()
@@ -260,6 +269,7 @@ class Yapi():
         self.lam=np.zeros((self.storeynumber,1))
         for i in range(0,self.storeynumber):
             self.lam[i]=self.lx[i]/self.M_Generalized[i][i]
+            self.lam[i]=self.lam[i].round(2)
         
         # print(self.lam)        
         return
@@ -269,6 +279,7 @@ class Yapi():
         
         for i in range(0,self.storeynumber):
             self.M_eff[i]=self.lx[i]**2/self.M_Generalized[i][i]
+            self.M_eff[i]=self.M_eff[i].round(2)
         
             # print("Mx{}={}".format(i,self.M_eff[i]))
             

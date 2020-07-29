@@ -8,6 +8,7 @@
 6-Open ın başına reset all yap
 7-Grafikleri ayrı ayrı al(mode shapes)
 8-Her birine başlık at
+9-damping ratio kutusu ekle
 
 
 Very last to do list:
