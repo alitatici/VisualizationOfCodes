@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-yapi=Yapi([100,100,100,100,100], [12800*2,30341*2,30341*2,30341*2,30341*2], 5)
+yapi=Yapi([100,100,100], [12800*2,30341*2,30341*2], 3)
 
 yapi.rigidityMatrix()
 yapi.massMatrix()
@@ -17,12 +17,12 @@ yapi.generalDampingMat()
 yapi.modeParticipatingFactor()
 yapi.effectiveParticipatingMass()
 yapi.earthquakeData("depremkaydi.csv",",")
+yapi.spectra2()
 yapi.spectra1()
 yapi.psuedoAcceleration()
 yapi.baseShear()
 yapi.baseShearSRSS()
 yapi.ModalShapes()
-
 
 
 # plt.plot(a)
