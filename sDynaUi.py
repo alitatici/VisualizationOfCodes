@@ -2,20 +2,25 @@
 
 # Form implementation generated from reading ui file 'sDynaUi.ui'
 #
-# Created by: PyQt5 UI code generator 5.12.3
+# Created by: PyQt5 UI code generator 5.9.2
 #
 # WARNING! All changes made in this file will be lost!
 
-
 from PyQt5 import QtCore, QtGui, QtWidgets
-
 
 class Ui_sDyna(object):
     def setupUi(self, sDyna):
         sDyna.setObjectName("sDyna")
-        sDyna.resize(1317, 555)
-        sDyna.setMinimumSize(QtCore.QSize(1317, 555))
-        sDyna.setMaximumSize(QtCore.QSize(1317, 555))
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(sDyna.sizePolicy().hasHeightForWidth())
+        sDyna.setSizePolicy(sizePolicy)
+        sDyna.setMinimumSize(QtCore.QSize(1280, 555))
+        sDyna.setMaximumSize(QtCore.QSize(1280, 555))
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("icon_1.jpg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        sDyna.setWindowIcon(icon)
         sDyna.setStyleSheet("/*\n"
 " * The MIT License (MIT)\n"
 " *\n"
@@ -1433,7 +1438,7 @@ class Ui_sDyna(object):
         self.txt_Results.setObjectName("txt_Results")
         sDyna.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(sDyna)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 1317, 26))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 1280, 22))
         self.menubar.setObjectName("menubar")
         self.menuHelp = QtWidgets.QMenu(self.menubar)
         self.menuHelp.setObjectName("menuHelp")
@@ -1452,7 +1457,7 @@ class Ui_sDyna(object):
 
     def retranslateUi(self, sDyna):
         _translate = QtCore.QCoreApplication.translate
-        sDyna.setWindowTitle(_translate("sDyna", "MainWindow"))
+        sDyna.setWindowTitle(_translate("sDyna", "sDyna"))
         item = self.tb_data.horizontalHeaderItem(0)
         item.setText(_translate("sDyna", "Floor"))
         item = self.tb_data.horizontalHeaderItem(1)
@@ -1528,8 +1533,8 @@ class Ui_sDyna(object):
         self.txt_Results.setHtml(_translate("sDyna", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:10pt; font-weight:400; font-style:normal;\">\n"
-"<p align=\"center\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:7.8pt;\"><br /></p></body></html>"))
+"</style></head><body style=\" font-family:\'.AppleSystemUIFont\'; font-size:10pt; font-weight:400; font-style:normal;\">\n"
+"<p align=\"center\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'MS Shell Dlg 2\'; font-size:7.8pt;\"><br /></p></body></html>"))
         self.menuHelp.setTitle(_translate("sDyna", "Help"))
         self.actionAbout.setText(_translate("sDyna", "About"))
 
@@ -1542,3 +1547,4 @@ if __name__ == "__main__":
     ui.setupUi(sDyna)
     sDyna.show()
     sys.exit(app.exec_())
+

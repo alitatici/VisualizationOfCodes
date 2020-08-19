@@ -16,6 +16,7 @@ import os
 #----------------------------------------------#
 Application = QApplication(sys.argv)
 WinMain = QMainWindow()
+WinMain.setWindowIcon
 ui = Ui_sDyna() #sDynaUi.py class isminden kopyalandı.
 ui.setupUi(WinMain) #tasarımdaki form ile pencereyi birleştir
 WinMain.show() #pencereyi göster.
@@ -301,15 +302,13 @@ def saveExcelFile():
 #-----------------------------------------#
 def openExcelFile():
 
-
-    # zaten veri girilmişse verileri resetle ekle
     # Choosing Excel File
     options = QFileDialog.Options()
     options |= QFileDialog.DontUseNativeDialog
     fileName, _ = QFileDialog.getOpenFileName(WinMain,"Select Database", "","Excel Files (*.xlsx)", options=options)
     
     try: 
-        
+        deleteAll()
         wb = xlrd.open_workbook(fileName) 
         sheet = wb.sheet_by_index(0) 
         sheet.cell_value(0, 0)
@@ -423,7 +422,11 @@ def run_():
     answer4 = QMessageBox.question(WinMain,"Run","Are you sure to run?",\
                                     QMessageBox.Yes | QMessageBox.No)
     if answer4 == QMessageBox.Yes:
-        run()
+        try:
+            run()
+        except Exception as Error:
+            ui.txt_Results.clear()
+            ui.statusbar.showMessage("Error: There is an invalid value",10000)
     else:
         ui.progressBar.hide()
         ui.statusbar.showMessage("Running has been cancelled.",10000)
@@ -440,6 +443,15 @@ def word():
     import matplotlib.pyplot as plt
     import matplotlib
     from docx.enum.table import WD_TABLE_ALIGNMENT
+
+    options = QFileDialog.Options()
+    options |= QFileDialog.DontUseNativeDialog
+    savedfileName, _ = QFileDialog.getSaveFileName(WinMain,"Save File","","Docx Files (*.docx)", options=options)
+    if savedfileName.endswith(".docx")==True:
+        savedfileName=savedfileName
+    else:
+
+        savedfileName=(savedfileName+ ".docx")
 
     completed = 0
     while completed < 12:
@@ -825,7 +837,7 @@ def word():
     ui.progressBar.hide()
     ui.progressBar.setProperty("value", 0)
 
-    document.save("word.docx")
+    document.save(savedfileName)
 
 #--------------Printing Bar----------------#
 #-----------------------------------------#
@@ -836,7 +848,12 @@ def word_():
     answer4 = QMessageBox.question(WinMain,"Print","Are you sure to print?",\
                                     QMessageBox.Yes | QMessageBox.No)
     if answer4 == QMessageBox.Yes:
-        word()
+        try:
+            word()
+        except Exception as Error:
+            os.remove(savedfileName)
+            ui.statusbar.showMessage("Error: There is an invalid value",10000)
+
     else:
         ui.progressBar.hide()
         ui.statusbar.showMessage("Printing process has been cancelled.",10000)
@@ -868,13 +885,13 @@ sys.exit(Application.exec_())
 #-----------------------------------------#
 #rigidity=stiffness
 
-# 1- Pencere çerçevesini düzenle. 
-#     1.1- .PNG ekle
-#     1.2- İsim ekle
-# 3- Run - Pencere açtır.
+# 1- Pencere çerçevesini düzenle. OK
+#     1.1- .PNG ekle OK
+#     1.2- İsim ekle OK
+# 3- Run - Pencere açtır. OK
 # 4- Print
-#     4.1- Print tuşuna basınca kayıt edeceği klasörü seçsin.
-# 5- Save de cancel hatası
+#     4.1- Print tuşuna basınca kayıt edeceği klasörü seçsin. OK
+# 5- Save de cancel hatası OK
 # 6-Open ın başına reset all yap
 # 7-Grafikleri ayrı ayrı al(mode shapes)
 # 8-Her birine başlık at
@@ -891,5 +908,6 @@ sys.exit(Application.exec_())
 # python -m PyQt5.uic.pyuic -x sDynaUi.ui -o sDynaUi.py
 
 # Hatalar
-# 1-open'da excel dosyasında string girilme hatası var.
+# 1-open'da excel dosyasında string girilme hatası var. OK
+# 2-zaten veri girilmişse verileri resetle ekle OK
 
