@@ -889,14 +889,14 @@ sys.exit(Application.exec_())
 #     1.1- .PNG ekle OK
 #     1.2- İsim ekle OK
 # 3- Run - Pencere açtır. OK
-# 4- Print
+# 4- Print OK
 #     4.1- Print tuşuna basınca kayıt edeceği klasörü seçsin. OK
 # 5- Save de cancel hatası OK
-# 6-Open ın başına reset all yap
-# 7-Grafikleri ayrı ayrı al(mode shapes)
-# 8-Her birine başlık at
-# 9-damping ratio kutusu ekle
-# 10- textedit'i düzenle. başlıklar bold
+# 6-Open ın başına reset all yap OK
+# 7-Grafikleri ayrı ayrı al(mode shapes) SALLA
+# 8-Her birine başlık at SALLA
+# 9-damping ratio kutusu ekle SALLA
+# 10- textedit'i düzenle. başlıklar bold SALLA salla
 
 
 # Very last to do list:
