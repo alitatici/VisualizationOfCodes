@@ -30,8 +30,6 @@ WinManual=QDialog()
 uiManual = Ui_Manual()
 uiManual.setupUi(WinManual)
 
-
-
 #---------------Create DataBase----------------#
 #----------------------------------------------#
 import sqlite3
