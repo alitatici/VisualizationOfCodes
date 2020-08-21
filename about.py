@@ -2,18 +2,17 @@
 
 # Form implementation generated from reading ui file 'about.ui'
 #
-# Created by: PyQt5 UI code generator 5.12.3
+# Created by: PyQt5 UI code generator 5.9.2
 #
 # WARNING! All changes made in this file will be lost!
 
-
 from PyQt5 import QtCore, QtGui, QtWidgets
-
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
-        Dialog.resize(600, 477)
+        Dialog.setEnabled(True)
+        Dialog.resize(493, 371)
         Dialog.setStyleSheet("/*\n"
 " * The MIT License (MIT)\n"
 " *\n"
@@ -1275,29 +1274,60 @@ class Ui_Dialog(object):
 "    border-radius: 0px;\n"
 "    border: 1px solid #AAAAAA;\n"
 "}")
-        self.label_2 = QtWidgets.QLabel(Dialog)
-        self.label_2.setGeometry(QtCore.QRect(190, 360, 211, 20))
-        self.label_2.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_2.setObjectName("label_2")
         self.label_3 = QtWidgets.QLabel(Dialog)
-        self.label_3.setGeometry(QtCore.QRect(190, 430, 211, 20))
-        self.label_3.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_3.setGeometry(QtCore.QRect(190, 30, 81, 16))
         self.label_3.setObjectName("label_3")
-        self.label = QtWidgets.QLabel(Dialog)
-        self.label.setGeometry(QtCore.QRect(10, 10, 581, 341))
-        self.label.setText("")
-        self.label.setPixmap(QtGui.QPixmap("OnurAliSS.png"))
-        self.label.setScaledContents(True)
-        self.label.setObjectName("label")
+        self.pushButton = QtWidgets.QPushButton(Dialog)
+        self.pushButton.setGeometry(QtCore.QRect(40, 290, 31, 31))
+        self.pushButton.setStyleSheet("border: none;")
+        self.pushButton.setText("")
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("linkedin_icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.pushButton.setIcon(icon)
+        self.pushButton.setIconSize(QtCore.QSize(50, 50))
+        self.pushButton.setObjectName("pushButton")
+        self.pushButton_2 = QtWidgets.QPushButton(Dialog)
+        self.pushButton_2.setGeometry(QtCore.QRect(220, 290, 31, 31))
+        self.pushButton_2.setStyleSheet("border: none;")
+        self.pushButton_2.setText("")
+        self.pushButton_2.setIcon(icon)
+        self.pushButton_2.setIconSize(QtCore.QSize(50, 50))
+        self.pushButton_2.setObjectName("pushButton_2")
+        self.label_5 = QtWidgets.QLabel(Dialog)
+        self.label_5.setGeometry(QtCore.QRect(80, 300, 121, 20))
+        self.label_5.setObjectName("label_5")
+        self.label_4 = QtWidgets.QLabel(Dialog)
+        self.label_4.setGeometry(QtCore.QRect(260, 300, 175, 20))
+        self.label_4.setObjectName("label_4")
+        self.textEdit = QtWidgets.QTextEdit(Dialog)
+        self.textEdit.setEnabled(True)
+        self.textEdit.setGeometry(QtCore.QRect(40, 60, 401, 221))
+        self.textEdit.setStyleSheet("border: none;")
+        self.textEdit.setReadOnly(True)
+        self.textEdit.setOverwriteMode(True)
+        self.textEdit.setObjectName("textEdit")
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "About"))
-        self.label_2.setText(_translate("Dialog", "Lords of the codes are watching you!"))
-        self.label_3.setText(_translate("Dialog", "Hakları saklı değildir, arayan bulur. @14.07.2020"))
+        Dialog.setWindowTitle(_translate("Dialog", "About Us"))
+        self.label_3.setText(_translate("Dialog", "CREATORS"))
+        self.label_5.setText(_translate("Dialog", "alitatici@gmail.com"))
+        self.label_4.setText(_translate("Dialog", "onurulku2334@gmail.com"))
+        self.textEdit.setHtml(_translate("Dialog", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'.AppleSystemUIFont\'; font-size:13pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">ALI TALHA ATICI</span></p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Graduated from Yildiz Technical University in 2019 as a civil engineer. He is studying Earthquake Engineering for an M.Sc degree at Bogazici University. Ali Talha ATICI is currently working as a civil engineer at OTS Engineering. For more information, please click the LinkedIn link below the page.</p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">ONUR ULKU</span></p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Graduated from Yildiz Technical University in 2019 as a civil engineer. He is currently studying Earthquake Engineering for an M.Sc degree at Bogazici University. For more information, please click the LinkedIn link below the page.</p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
 
 
 if __name__ == "__main__":
@@ -1308,3 +1338,4 @@ if __name__ == "__main__":
     ui.setupUi(Dialog)
     Dialog.show()
     sys.exit(app.exec_())
+
