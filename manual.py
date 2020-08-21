@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'about.ui'
+# Form implementation generated from reading ui file 'manual.ui'
 #
 # Created by: PyQt5 UI code generator 5.9.2
 #
@@ -8,12 +8,11 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-class Ui_Dialog(object):
-    def setupUi(self, Dialog):
-        Dialog.setObjectName("Dialog")
-        Dialog.setEnabled(True)
-        Dialog.resize(493, 382)
-        Dialog.setStyleSheet("/*\n"
+class Ui_Manual(object):
+    def setupUi(self, Manual):
+        Manual.setObjectName("Manual")
+        Manual.resize(501, 386)
+        Manual.setStyleSheet("/*\n"
 " * The MIT License (MIT)\n"
 " *\n"
 " * Copyright (c) <2013-2014> <Colin Duquesnoy>\n"
@@ -1274,88 +1273,42 @@ class Ui_Dialog(object):
 "    border-radius: 0px;\n"
 "    border: 1px solid #AAAAAA;\n"
 "}")
-        self.label_3 = QtWidgets.QLabel(Dialog)
-        self.label_3.setGeometry(QtCore.QRect(190, 30, 81, 16))
-        self.label_3.setObjectName("label_3")
-        self.pushButton = QtWidgets.QPushButton(Dialog)
-        self.pushButton.setGeometry(QtCore.QRect(40, 290, 31, 31))
-        self.pushButton.setStyleSheet("border: none;")
-        self.pushButton.setText("")
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("linkedin_icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.pushButton.setIcon(icon)
-        self.pushButton.setIconSize(QtCore.QSize(50, 50))
-        self.pushButton.setObjectName("pushButton")
-        self.pushButton_2 = QtWidgets.QPushButton(Dialog)
-        self.pushButton_2.setGeometry(QtCore.QRect(220, 290, 31, 31))
-        self.pushButton_2.setStyleSheet("border: none;")
-        self.pushButton_2.setText("")
-        self.pushButton_2.setIcon(icon)
-        self.pushButton_2.setIconSize(QtCore.QSize(50, 50))
-        self.pushButton_2.setObjectName("pushButton_2")
-        self.label_5 = QtWidgets.QLabel(Dialog)
-        self.label_5.setGeometry(QtCore.QRect(80, 300, 121, 20))
-        self.label_5.setTextInteractionFlags(QtCore.Qt.LinksAccessibleByMouse|QtCore.Qt.TextSelectableByKeyboard|QtCore.Qt.TextSelectableByMouse)
-        self.label_5.setObjectName("label_5")
-        self.label_4 = QtWidgets.QLabel(Dialog)
-        self.label_4.setGeometry(QtCore.QRect(260, 300, 175, 20))
-        self.label_4.setTextInteractionFlags(QtCore.Qt.LinksAccessibleByMouse|QtCore.Qt.TextSelectableByKeyboard|QtCore.Qt.TextSelectableByMouse)
-        self.label_4.setObjectName("label_4")
-        self.textEdit = QtWidgets.QTextEdit(Dialog)
-        self.textEdit.setEnabled(True)
-        self.textEdit.setGeometry(QtCore.QRect(40, 60, 401, 221))
-        self.textEdit.setStyleSheet("border: none;\n"
-"")
-        self.textEdit.setReadOnly(True)
-        self.textEdit.setOverwriteMode(True)
+        self.textEdit = QtWidgets.QTextEdit(Manual)
+        self.textEdit.setGeometry(QtCore.QRect(10, 10, 481, 371))
+        self.textEdit.setTextInteractionFlags(QtCore.Qt.TextSelectableByKeyboard|QtCore.Qt.TextSelectableByMouse)
         self.textEdit.setObjectName("textEdit")
-        self.horizontalLayoutWidget = QtWidgets.QWidget(Dialog)
-        self.horizontalLayoutWidget.setGeometry(QtCore.QRect(40, 340, 381, 31))
-        self.horizontalLayoutWidget.setObjectName("horizontalLayoutWidget")
-        self.horizontalLayout = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget)
-        self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
-        self.horizontalLayout.setObjectName("horizontalLayout")
-        self.label = QtWidgets.QLabel(self.horizontalLayoutWidget)
-        self.label.setObjectName("label")
-        self.horizontalLayout.addWidget(self.label)
-        spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.horizontalLayout.addItem(spacerItem)
-        self.label_2 = QtWidgets.QLabel(self.horizontalLayoutWidget)
-        self.label_2.setTextInteractionFlags(QtCore.Qt.LinksAccessibleByMouse|QtCore.Qt.TextSelectableByKeyboard|QtCore.Qt.TextSelectableByMouse)
-        self.label_2.setObjectName("label_2")
-        self.horizontalLayout.addWidget(self.label_2)
 
-        self.retranslateUi(Dialog)
-        QtCore.QMetaObject.connectSlotsByName(Dialog)
+        self.retranslateUi(Manual)
+        QtCore.QMetaObject.connectSlotsByName(Manual)
 
-    def retranslateUi(self, Dialog):
+    def retranslateUi(self, Manual):
         _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "About Us"))
-        self.label_3.setText(_translate("Dialog", "CREATORS"))
-        self.label_5.setText(_translate("Dialog", "alitatici@gmail.com"))
-        self.label_4.setText(_translate("Dialog", "onurulku2334@gmail.com"))
-        self.textEdit.setHtml(_translate("Dialog", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+        Manual.setWindowTitle(_translate("Manual", "Manual"))
+        self.textEdit.setHtml(_translate("Manual", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'.AppleSystemUIFont\'; font-size:13pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">ALI TALHA ATICI</span></p>\n"
+"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:18pt; font-weight:600;\">Manual</span></p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:18pt; font-weight:600;\"><br /></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">    This program is prepared to calculate the base shear force of multi-degree of freedom (MDOF) systems according to selected earthquake data. </p>\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Graduated from Yildiz Technical University in 2019 as a civil engineer. He is studying Earthquake Engineering for an M.Sc degree at Bogazici University. Ali Talha ATICI is currently working as a civil engineer at OTS Engineering. For more information, please click the LinkedIn link below the page.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">    As can be seen, for every floor, mass and stiffness must be entered to calculate the system\'s amplitudes according to the equation of motion (EOM). </p>\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">ONUR ULKU</span></p>\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Graduated from Yildiz Technical University in 2019 as a civil engineer. He is currently studying Earthquake Engineering for an M.Sc degree at Bogazici University. For more information, please click the LinkedIn link below the page.</p>\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
-        self.label.setText(_translate("Dialog", "Email for Errors and Questions:"))
-        self.label_2.setText(_translate("Dialog", "fyatoneq@gmail.com"))
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">    This program can be used easily when people need an urgent calculation. </p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"> </p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">NOTES:</span></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">1- </span>When trying to enter data, do not forget to fill all required areas. </p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">2- </span>Earthquake data must be generated as two different columns, and the first column must include the time while the second one includes acceleration.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">3- </span>Earthquake data file must not have additional information in the first row.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">4- </span>Seperator can be both dot (\'.\'), comma (\',\'),or space (\' \').</p></body></html>"))
 
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    Dialog = QtWidgets.QDialog()
-    ui = Ui_Dialog()
-    ui.setupUi(Dialog)
-    Dialog.show()
+    Manual = QtWidgets.QDialog()
+    ui = Ui_Manual()
+    ui.setupUi(Manual)
+    Manual.show()
     sys.exit(app.exec_())
 

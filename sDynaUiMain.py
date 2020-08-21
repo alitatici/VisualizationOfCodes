@@ -5,6 +5,7 @@ from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import *
 from sDynaUi import *
 from about import *
+from manual import *
 import xlsxwriter
 import xlrd
 from MDOF import *
@@ -24,6 +25,10 @@ WinMain.show() #pencereyi göster.
 WinAbout=QDialog()
 uiAbout = Ui_Dialog()
 uiAbout.setupUi(WinAbout)
+
+WinManual=QDialog()
+uiManual = Ui_Manual()
+uiManual.setupUi(WinManual)
 
 
 
@@ -252,6 +257,11 @@ def search_():
 #-----------------------------------------#
 def about_():
     WinAbout.show()
+
+#-----------------Manual-------------------#
+#-----------------------------------------#
+def manual_():
+    WinManual.show()
 
 #---------------EQ FILE-------------------#
 #-----------------------------------------#
@@ -858,6 +868,16 @@ def word_():
         ui.progressBar.hide()
         ui.statusbar.showMessage("Printing process has been cancelled.",10000)
         WinMain.show()
+    
+#-----------------Links-------------------#
+#-----------------------------------------#
+def linkOnur():
+    import webbrowser
+    webbrowser.open('https://www.linkedin.com/in/onur-%C3%BClk%C3%BC-836434128/')
+
+def linkAli():
+    import webbrowser
+    webbrowser.open('https://www.linkedin.com/in/alitatici/')
 
 #---------------SIGNAL-SLOT---------------#
 #-----------------------------------------#
@@ -867,7 +887,8 @@ ui.pb_Exit.clicked.connect(exit_)
 ui.pb_dltRow.clicked.connect(deleteRow)
 ui.pb_find.clicked.connect(search_)
 ui.pb_list.clicked.connect(makeList)
-ui.menuHelp.triggered.connect(about_)
+ui.actionAbout.triggered.connect(about_)
+ui.actionManual_2.triggered.connect(manual_)
 ui.pb_change.clicked.connect(changeRow)
 ui.cm_Floor.activated.connect(comboact)
 ui.pb_fromfile.clicked.connect(eqfile)
@@ -875,7 +896,8 @@ ui.pb_Save.clicked.connect(saveExcelFile)
 ui.pb_Open.clicked.connect(openExcelFile)
 ui.pb_run.clicked.connect(run_)
 ui.pb_Print.clicked.connect(word_)
-
+uiAbout.pushButton_2.clicked.connect(linkOnur)
+uiAbout.pushButton.clicked.connect(linkAli)
 
 
 

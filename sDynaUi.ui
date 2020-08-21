@@ -1824,7 +1824,7 @@ ColorButton::disabled {
      <rect>
       <x>20</x>
       <y>350</y>
-      <width>137</width>
+      <width>161</width>
       <height>26</height>
      </rect>
     </property>
@@ -1837,7 +1837,7 @@ ColorButton::disabled {
      <rect>
       <x>20</x>
       <y>380</y>
-      <width>160</width>
+      <width>171</width>
       <height>26</height>
      </rect>
     </property>
@@ -1941,7 +1941,12 @@ p, li { white-space: pre-wrap; }
     <property name="title">
      <string>Help</string>
     </property>
+    <addaction name="actionManual_2"/>
+    <addaction name="separator"/>
     <addaction name="actionAbout"/>
+    <addaction name="separator"/>
+    <addaction name="separator"/>
+    <addaction name="separator"/>
    </widget>
    <addaction name="menuHelp"/>
   </widget>
@@ -1949,6 +1954,16 @@ p, li { white-space: pre-wrap; }
   <action name="actionAbout">
    <property name="text">
     <string>About Us</string>
+   </property>
+  </action>
+  <action name="actionManual">
+   <property name="text">
+    <string>Manual</string>
+   </property>
+  </action>
+  <action name="actionManual_2">
+   <property name="text">
+    <string>Manual</string>
    </property>
   </action>
  </widget>

@@ -1410,10 +1410,10 @@ class Ui_sDyna(object):
         self.pb_Open.setGeometry(QtCore.QRect(20, 430, 121, 31))
         self.pb_Open.setObjectName("pb_Open")
         self.label_4 = QtWidgets.QLabel(self.centralwidget)
-        self.label_4.setGeometry(QtCore.QRect(20, 350, 137, 26))
+        self.label_4.setGeometry(QtCore.QRect(20, 350, 161, 26))
         self.label_4.setObjectName("label_4")
         self.label_5 = QtWidgets.QLabel(self.centralwidget)
-        self.label_5.setGeometry(QtCore.QRect(20, 380, 160, 26))
+        self.label_5.setGeometry(QtCore.QRect(20, 380, 171, 26))
         self.label_5.setObjectName("label_5")
         self.lne_Seperator = QtWidgets.QLineEdit(self.centralwidget)
         self.lne_Seperator.setGeometry(QtCore.QRect(220, 380, 421, 26))
@@ -1449,7 +1449,16 @@ class Ui_sDyna(object):
         sDyna.setStatusBar(self.statusbar)
         self.actionAbout = QtWidgets.QAction(sDyna)
         self.actionAbout.setObjectName("actionAbout")
+        self.actionManual = QtWidgets.QAction(sDyna)
+        self.actionManual.setObjectName("actionManual")
+        self.actionManual_2 = QtWidgets.QAction(sDyna)
+        self.actionManual_2.setObjectName("actionManual_2")
+        self.menuHelp.addAction(self.actionManual_2)
+        self.menuHelp.addSeparator()
         self.menuHelp.addAction(self.actionAbout)
+        self.menuHelp.addSeparator()
+        self.menuHelp.addSeparator()
+        self.menuHelp.addSeparator()
         self.menubar.addAction(self.menuHelp.menuAction())
 
         self.retranslateUi(sDyna)
@@ -1538,6 +1547,8 @@ class Ui_sDyna(object):
 "<p align=\"center\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'MS Shell Dlg 2\'; font-size:7.8pt;\"><br /></p></body></html>"))
         self.menuHelp.setTitle(_translate("sDyna", "Help"))
         self.actionAbout.setText(_translate("sDyna", "About Us"))
+        self.actionManual.setText(_translate("sDyna", "Manual"))
+        self.actionManual_2.setText(_translate("sDyna", "Manual"))
 
 
 if __name__ == "__main__":
