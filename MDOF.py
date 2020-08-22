@@ -226,14 +226,14 @@ class Yapi():
     def spectra2(self):
         Sd, Sv, Sa=[], [], []
 
-        for i in np.arange(0.1,4,0.1):
+        for i in np.arange(0.1,4,0.01):
             sd , sv , sa = Yapi.spectra(self,i)
             Sd.append(sd)
             Sv.append(sv)
             Sa.append(sa)
 
         plt.figure()
-        plt.plot(np.arange(0.1,4,0.1),Sd)
+        plt.plot(np.arange(0.1,4,0.01),Sd)
         ax0 = plt.gca()
         ax0.grid(True)
         ax0.legend()
@@ -242,7 +242,7 @@ class Yapi():
         plt.title("Displacement Response Spectrum")
         plt.savefig("PseudoDisplacement.png")
         plt.figure()
-        plt.plot(np.arange(0.1,4,0.1),Sa)
+        plt.plot(np.arange(0.1,4,0.01),Sa)
         ax0 = plt.gca()
         ax0.grid(True)
         ax0.legend()
