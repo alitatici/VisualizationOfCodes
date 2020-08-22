@@ -138,7 +138,7 @@ def deleteAll():
         ui.lne_Rigidity.clear()
         ui.cm_Floor.setCurrentIndex(-1) # "-1" comboBox içine hiçbirşey yazmamayı ifade eder.
         ui.lne_EQData.clear()
-        ui.lne_Seperator.clear()
+        ui.lne_Interval.clear()
         ui.label_savedFloor.clear()
     else:
         WinMain.show()
@@ -354,7 +354,7 @@ def run():
     floorNumber = curs.fetchone()
 
     _lne_EQData = ui.lne_EQData.text()
-    _lne_Seperator = ui.lne_Seperator.text()
+    _lne_Interval = ui.lne_Interval.text()
 
     #-----------Run MDOF-----------#
     yapi=Yapi(massList, rigidityList, floorNumber[0])
@@ -400,7 +400,7 @@ def run():
         completed += 0.0001
         ui.progressBar.setValue(completed)
 
-    yapi.earthquakeData(_lne_EQData,_lne_Seperator)
+    yapi.earthquakeData(_lne_EQData,float(_lne_Interval))
     os.remove("EarthquakeData.png")
     yapi.spectra1()
     yapi.psuedoAcceleration()
@@ -430,11 +430,11 @@ def run_():
     answer4 = QMessageBox.question(WinMain,"Run","Are you sure to run?",\
                                     QMessageBox.Yes | QMessageBox.No)
     if answer4 == QMessageBox.Yes:
-        try:
-            run()
-        except Exception as Error:
-            ui.txt_Results.clear()
-            ui.statusbar.showMessage("Error: There is an invalid value",10000)
+        # try:
+        run()
+        # except Exception as Error:
+        #     ui.txt_Results.clear()
+        #     ui.statusbar.showMessage("Error: There is an invalid value",10000)
     else:
         ui.progressBar.hide()
         ui.statusbar.showMessage("Running has been cancelled.",10000)
@@ -478,7 +478,7 @@ def word():
     curs.execute("SELECT COUNT (*) FROM sDyna")
     floorNumber = curs.fetchone()
     _lne_EQData = ui.lne_EQData.text()
-    _lne_Seperator = ui.lne_Seperator.text()
+    _lne_Interval = ui.lne_Interval.text()
     yapi=Yapi(massList, rigidityList, floorNumber[0])
     yapi.rigidityMatrix()
     yapi.massMatrix()
@@ -492,7 +492,7 @@ def word():
     yapi.generalDampingMat()
     yapi.modeParticipatingFactor()  
     yapi.effectiveParticipatingMass()
-    yapi.earthquakeData(_lne_EQData,_lne_Seperator)
+    yapi.earthquakeData(_lne_EQData,float(_lne_Interval))
     yapi.spectra2()
     yapi.spectra1()
     yapi.psuedoAcceleration()

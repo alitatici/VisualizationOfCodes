@@ -1367,12 +1367,12 @@ ColorButton::disabled {
     </column>
     <column>
      <property name="text">
-      <string>Mass</string>
+      <string>Mass (t)</string>
      </property>
     </column>
     <column>
      <property name="text">
-      <string>Stiffness</string>
+      <string>Stiffness (kN/m)</string>
      </property>
     </column>
    </widget>
@@ -1591,7 +1591,7 @@ ColorButton::disabled {
        <item>
         <widget class="QLabel" name="label">
          <property name="text">
-          <string>Mass</string>
+          <string>Mass (t)</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
@@ -1608,7 +1608,7 @@ ColorButton::disabled {
        <item>
         <widget class="QLabel" name="label_2">
          <property name="text">
-          <string>Stiffness</string>
+          <string>Stiffness (kN/m)</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
@@ -1824,7 +1824,7 @@ ColorButton::disabled {
      <rect>
       <x>20</x>
       <y>350</y>
-      <width>161</width>
+      <width>151</width>
       <height>26</height>
      </rect>
     </property>
@@ -1837,20 +1837,20 @@ ColorButton::disabled {
      <rect>
       <x>20</x>
       <y>380</y>
-      <width>171</width>
+      <width>151</width>
       <height>26</height>
      </rect>
     </property>
     <property name="text">
-     <string>Earthquake Data Seperator:</string>
+     <string>Time Interval:</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lne_Seperator">
+   <widget class="QLineEdit" name="lne_Interval">
     <property name="geometry">
      <rect>
-      <x>220</x>
+      <x>180</x>
       <y>380</y>
-      <width>421</width>
+      <width>461</width>
       <height>26</height>
      </rect>
     </property>
@@ -1861,10 +1861,10 @@ ColorButton::disabled {
      <string/>
     </property>
     <property name="maxLength">
-     <number>1</number>
+     <number>10</number>
     </property>
     <property name="placeholderText">
-     <string>For instance, comma (','),or space (' '). (cannot be dot ('.'))</string>
+     <string>Input time interval of earthquake data (for example:0.01)</string>
     </property>
     <property name="clearButtonEnabled">
      <bool>true</bool>
@@ -1873,14 +1873,14 @@ ColorButton::disabled {
    <widget class="QLineEdit" name="lne_EQData">
     <property name="geometry">
      <rect>
-      <x>220</x>
+      <x>180</x>
       <y>350</y>
-      <width>421</width>
+      <width>461</width>
       <height>26</height>
      </rect>
     </property>
     <property name="placeholderText">
-     <string>Input earthquake file which only has time and acceleration data.</string>
+     <string>Input earthquake file which only is taken from AFAD.(check manual)</string>
     </property>
     <property name="clearButtonEnabled">
      <bool>true</bool>

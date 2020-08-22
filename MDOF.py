@@ -133,8 +133,8 @@ class Yapi():
         # print("C Generalized=\n{}".format(self.C_Generalized))
         return
     
-    def earthquakeData(self,file_use_quotationmark,delimiter_use_quotationmark):
-        ag_txt = np.loadtxt(file_use_quotationmark, delimiter=delimiter_use_quotationmark, skiprows=65)
+    def earthquakeData(self,file_use_quotationmark,dt):
+        ag_txt = np.loadtxt(file_use_quotationmark, skiprows=65)
         groundacc=ag_txt[:]
         self.ags=groundacc.flatten("C")
         self.t_amount = len(self.ags)
@@ -146,7 +146,7 @@ class Yapi():
         fig, ax = plt.subplots(1, 1)
         fig.subplots_adjust(hspace=0)
         fig.suptitle("Earthquake Data", fontsize=18)
-        self.dt=0.01
+        self.dt=dt
         t = np.arange(0, self.t_amount*self.dt, self.dt)
         ax.plot(t, self.ags)
         ax.set_ylabel("Acceleration (cm/sec^2)")
@@ -228,14 +228,14 @@ class Yapi():
     def spectra2(self):
         Sd, Sv, Sa=[], [], []
 
-        for i in np.arange(0.1,4,0.005):
+        for i in np.arange(0.1,4,self.dt):
             sd , sv , sa = Yapi.spectra(self,i)
             Sd.append(sd)
             Sv.append(sv)
             Sa.append(sa)
 
         plt.figure()
-        plt.plot(np.arange(0.1,4,0.005),Sd)
+        plt.plot(np.arange(0.1,4,self.dt),Sd)
         ax0 = plt.gca()
         ax0.grid(True)
         ax0.legend()
@@ -244,7 +244,7 @@ class Yapi():
         plt.title("Displacement Response Spectrum")
         plt.savefig("PseudoDisplacement.png")
         plt.figure()
-        plt.plot(np.arange(0.1,4,0.005),Sa)
+        plt.plot(np.arange(0.1,4,self.dt),Sa)
         ax0 = plt.gca()
         ax0.grid(True)
         ax0.legend()
