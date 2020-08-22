@@ -901,37 +901,3 @@ uiAbout.pushButton.clicked.connect(linkAli)
 
 sys.exit(Application.exec_())
 
-#---------------NOTES---------------#
-#-----------------------------------------#
-#rigidity=stiffness
-
-# 1- Pencere çerçevesini düzenle. OK
-#     1.1- .PNG ekle OK
-#     1.2- İsim ekle OK
-# 3- Run - Pencere açtır. OK
-# 4- Print OK
-#     4.1- Print tuşuna basınca kayıt edeceği klasörü seçsin. OK
-# 5- Save de cancel hatası OK
-# 6-Open ın başına reset all yap OK
-# 7-Grafikleri ayrı ayrı al(mode shapes) SALLA
-# 8-Her birine başlık at SALLA
-# 9-damping ratio kutusu ekle SALLA
-# 10- textedit'i düzenle. başlıklar bold SALLA salla
-
-
-####
-#ACC GRAPH DUZELT ARALIK ARTIR..
-
-
-# Very last to do list:
-# 1- .exe'ye çevir.
-# 2- Üst menüyü düzenle, hakkımızda, kullanım kılavuzu, file new print save save as, exit ekle.
-# 3- 
-
-
-# python -m PyQt5.uic.pyuic -x sDynaUi.ui -o sDynaUi.py
-
-# Hatalar
-# 1-open'da excel dosyasında string girilme hatası var. OK
-# 2-zaten veri girilmişse verileri resetle ekle OK
-
