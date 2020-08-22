@@ -136,15 +136,14 @@ class Yapi():
     def earthquakeData(self,file_use_quotationmark,delimiter_use_quotationmark):
         
         ag_txt = np.loadtxt(file_use_quotationmark, delimiter=delimiter_use_quotationmark)
-        self.time=ag_txt[:,0]
-        groundacc=ag_txt[:,1]
+        groundacc=ag_txt[:]
         self.ags=groundacc.flatten("C")
         self.t_amount = len(self.ags)
         fig, ax = plt.subplots(1, 1)
         fig.subplots_adjust(hspace=0)
         fig.suptitle("Earthquake Data", fontsize=18)
-        self.dt=self.time[1]-self.time[0]
-        t = np.arange(self.time[0], self.time[-1]+self.dt, self.dt)
+        self.dt=0.01
+        t = np.arange(0, 52.84+self.dt, self.dt)
         ax.plot(t, self.ags)
         ax.set_ylabel("Acceleration (cm/sec^2)")
         ax.set_xlabel("Time(sec)")
