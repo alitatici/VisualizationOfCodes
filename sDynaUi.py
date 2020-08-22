@@ -2,11 +2,13 @@
 
 # Form implementation generated from reading ui file 'sDynaUi.ui'
 #
-# Created by: PyQt5 UI code generator 5.9.2
+# Created by: PyQt5 UI code generator 5.12.3
 #
 # WARNING! All changes made in this file will be lost!
 
+
 from PyQt5 import QtCore, QtGui, QtWidgets
+
 
 class Ui_sDyna(object):
     def setupUi(self, sDyna):
@@ -1559,4 +1561,3 @@ if __name__ == "__main__":
     ui.setupUi(sDyna)
     sDyna.show()
     sys.exit(app.exec_())
-

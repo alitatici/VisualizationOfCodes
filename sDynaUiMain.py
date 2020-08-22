@@ -430,11 +430,11 @@ def run_():
     answer4 = QMessageBox.question(WinMain,"Run","Are you sure to run?",\
                                     QMessageBox.Yes | QMessageBox.No)
     if answer4 == QMessageBox.Yes:
-        # try:
-        run()
-        # except Exception as Error:
-        #     ui.txt_Results.clear()
-        #     ui.statusbar.showMessage("Error: There is an invalid value",10000)
+        try:
+            run()
+        except Exception as Error:
+            ui.txt_Results.clear()
+            ui.statusbar.showMessage("Error: There is an invalid value",10000)
     else:
         ui.progressBar.hide()
         ui.statusbar.showMessage("Running has been cancelled.",10000)
@@ -877,6 +877,11 @@ def linkAli():
     import webbrowser
     webbrowser.open('https://www.linkedin.com/in/alitatici/')
 
+def linkAFAD():
+    import webbrowser
+    webbrowser.open('https://tadas.afad.gov.tr/')
+
+
 #---------------SIGNAL-SLOT---------------#
 #-----------------------------------------#
 ui.pb_Add.clicked.connect(addData)
@@ -896,8 +901,7 @@ ui.pb_run.clicked.connect(run_)
 ui.pb_Print.clicked.connect(word_)
 uiAbout.pushButton_2.clicked.connect(linkOnur)
 uiAbout.pushButton.clicked.connect(linkAli)
-
-
+uiManual.commandLinkButton.clicked.connect(linkAFAD)
 
 sys.exit(Application.exec_())
 
