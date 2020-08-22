@@ -2,11 +2,13 @@
 
 # Form implementation generated from reading ui file 'sDynaUi.ui'
 #
-# Created by: PyQt5 UI code generator 5.9.2
+# Created by: PyQt5 UI code generator 5.12.3
 #
 # WARNING! All changes made in this file will be lost!
 
+
 from PyQt5 import QtCore, QtGui, QtWidgets
+
 
 class Ui_sDyna(object):
     def setupUi(self, sDyna):
@@ -1439,7 +1441,7 @@ class Ui_sDyna(object):
         self.txt_Results.setObjectName("txt_Results")
         sDyna.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(sDyna)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 1155, 22))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 1155, 26))
         self.menubar.setObjectName("menubar")
         self.menuHelp = QtWidgets.QMenu(self.menubar)
         self.menuHelp.setObjectName("menuHelp")
@@ -1473,9 +1475,9 @@ class Ui_sDyna(object):
         item = self.tb_data.horizontalHeaderItem(1)
         item.setText(_translate("sDyna", "Mass"))
         item = self.tb_data.horizontalHeaderItem(2)
-        item.setText(_translate("sDyna", "Rigidity"))
+        item.setText(_translate("sDyna", "Stiffness"))
         self.label_6.setText(_translate("sDyna", "Current Floors Number:"))
-        self.pb_Add.setToolTip(_translate("sDyna", "Adds the floor data to table."))
+        self.pb_Add.setToolTip(_translate("sDyna", "Add the floor data to table."))
         self.pb_Add.setText(_translate("sDyna", "ADD"))
         self.pb_Add.setShortcut(_translate("sDyna", "Return"))
         self.label_3.setText(_translate("sDyna", "Floor"))
@@ -1505,46 +1507,46 @@ class Ui_sDyna(object):
         self.cm_Floor.setItemText(23, _translate("sDyna", "24"))
         self.cm_Floor.setItemText(24, _translate("sDyna", "25"))
         self.label.setText(_translate("sDyna", "Mass"))
-        self.label_2.setText(_translate("sDyna", "Rigidity"))
-        self.pb_dltRow.setToolTip(_translate("sDyna", "Deletes a floor which you chose from the table."))
+        self.label_2.setText(_translate("sDyna", "Stiffness"))
+        self.pb_dltRow.setToolTip(_translate("sDyna", "Delete a floor which you chose from the table."))
         self.pb_dltRow.setText(_translate("sDyna", "DELETE FLOOR"))
         self.pb_dltRow.setShortcut(_translate("sDyna", "Del"))
-        self.pb_find.setToolTip(_translate("sDyna", "Shows only the data which you have entered to space of floor or mass or rigidity."))
+        self.pb_find.setToolTip(_translate("sDyna", "Show only the data which you have entered to space of floor or mass or stiffness."))
         self.pb_find.setText(_translate("sDyna", "FIND"))
-        self.pb_list.setToolTip(_translate("sDyna", "Lists all the floors."))
+        self.pb_list.setToolTip(_translate("sDyna", "List all the floors."))
         self.pb_list.setText(_translate("sDyna", "LIST"))
         self.pb_list.setShortcut(_translate("sDyna", "Ctrl+L"))
         self.pb_fromfile.setToolTip(_translate("sDyna", "Choose your earthquake record file."))
         self.pb_fromfile.setText(_translate("sDyna", "FROM FILE"))
-        self.pb_Exit.setToolTip(_translate("sDyna", "To close the window."))
+        self.pb_Exit.setToolTip(_translate("sDyna", "Close the window."))
         self.pb_Exit.setText(_translate("sDyna", "EXIT"))
         self.pb_Exit.setShortcut(_translate("sDyna", "Esc"))
-        self.pb_reset.setToolTip(_translate("sDyna", "Clears all data which you entered to window."))
+        self.pb_reset.setToolTip(_translate("sDyna", "Clear all data which you entered to window."))
         self.pb_reset.setText(_translate("sDyna", "RESET ALL"))
-        self.pb_run.setToolTip(_translate("sDyna", "Shows the results."))
+        self.pb_run.setToolTip(_translate("sDyna", "Show the results."))
         self.pb_run.setText(_translate("sDyna", "RUN"))
         self.pb_run.setShortcut(_translate("sDyna", "Ctrl+R"))
-        self.pb_Print.setToolTip(_translate("sDyna", "Prepares the report as a .docx file."))
+        self.pb_Print.setToolTip(_translate("sDyna", "Prepare the report as a .docx file."))
         self.pb_Print.setText(_translate("sDyna", "PRINT"))
         self.pb_Print.setShortcut(_translate("sDyna", "Ctrl+P"))
-        self.pb_change.setToolTip(_translate("sDyna", "Changes mass or rigidity data of a floor."))
+        self.pb_change.setToolTip(_translate("sDyna", "Change mass or stiffness data of a floor."))
         self.pb_change.setText(_translate("sDyna", "CHANGE"))
-        self.pb_Save.setToolTip(_translate("sDyna", "Saves your data which you entered."))
+        self.pb_Save.setToolTip(_translate("sDyna", "Save your data which you entered."))
         self.pb_Save.setText(_translate("sDyna", "SAVE"))
         self.pb_Save.setShortcut(_translate("sDyna", "Ctrl+S"))
-        self.pb_Open.setToolTip(_translate("sDyna", "To close the window."))
+        self.pb_Open.setToolTip(_translate("sDyna", "Open saved excel table."))
         self.pb_Open.setText(_translate("sDyna", "OPEN"))
         self.pb_Open.setShortcut(_translate("sDyna", "Ctrl+O"))
         self.label_4.setText(_translate("sDyna", "Earthquake Record File:"))
         self.label_5.setText(_translate("sDyna", "Earthquake Data Seperator:"))
-        self.lne_Seperator.setPlaceholderText(_translate("sDyna", "Input seperator of your earthquake record, for instance,  \",\" or \".\""))
+        self.lne_Seperator.setPlaceholderText(_translate("sDyna", "For instance, dot (\'.\'), comma (\',\'),or space (\' \')."))
         self.lne_EQData.setPlaceholderText(_translate("sDyna", "Input earthquake file which only has time and acceleration data."))
         self.progressBar.setFormat(_translate("sDyna", "Processing %p.00%"))
         self.txt_Results.setHtml(_translate("sDyna", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'.AppleSystemUIFont\'; font-size:10pt; font-weight:400; font-style:normal;\">\n"
-"<p align=\"center\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'MS Shell Dlg 2\'; font-size:7.8pt;\"><br /></p></body></html>"))
+"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:10pt; font-weight:400; font-style:normal;\">\n"
+"<p align=\"center\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:7.8pt;\"><br /></p></body></html>"))
         self.menuHelp.setTitle(_translate("sDyna", "Help"))
         self.actionAbout.setText(_translate("sDyna", "About Us"))
         self.actionManual.setText(_translate("sDyna", "Manual"))
@@ -1559,4 +1561,3 @@ if __name__ == "__main__":
     ui.setupUi(sDyna)
     sDyna.show()
     sys.exit(app.exec_())
-

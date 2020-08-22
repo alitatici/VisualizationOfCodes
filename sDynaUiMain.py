@@ -919,6 +919,10 @@ sys.exit(Application.exec_())
 # 10- textedit'i düzenle. başlıklar bold SALLA salla
 
 
+####
+#ACC GRAPH DUZELT ARALIK ARTIR..
+
+
 # Very last to do list:
 # 1- .exe'ye çevir.
 # 2- Üst menüyü düzenle, hakkımızda, kullanım kılavuzu, file new print save save as, exit ekle.
