@@ -134,16 +134,20 @@ class Yapi():
         return
     
     def earthquakeData(self,file_use_quotationmark,delimiter_use_quotationmark):
-        
-        ag_txt = np.loadtxt(file_use_quotationmark, delimiter=delimiter_use_quotationmark)
+        ag_txt = np.loadtxt(file_use_quotationmark, delimiter=delimiter_use_quotationmark, skiprows=65)
         groundacc=ag_txt[:]
         self.ags=groundacc.flatten("C")
         self.t_amount = len(self.ags)
+        # ag_txt = np.loadtxt(file_use_quotationmark, delimiter=delimiter_use_quotationmark, skiprows=65)
+        # groundacc=ag_txt[:]
+        # self.ags=groundacc.flatten("C")
+        # print(self.ags)
+        # self.t_amount = len(self.ags)
         fig, ax = plt.subplots(1, 1)
         fig.subplots_adjust(hspace=0)
         fig.suptitle("Earthquake Data", fontsize=18)
         self.dt=0.01
-        t = np.arange(0, 52.84+self.dt, self.dt)
+        t = np.arange(0, self.t_amount*self.dt, self.dt)
         ax.plot(t, self.ags)
         ax.set_ylabel("Acceleration (cm/sec^2)")
         ax.set_xlabel("Time(sec)")
@@ -152,7 +156,6 @@ class Yapi():
 
     def newmark(self, m, c, k, dt1, p, beta, gamma, x0, v0):
         
-        dt1=self.dt
         t_amount1 = len(p)
         
         khat= k + gamma/(beta*dt1)*c + 1/(beta*(dt1**2))*m
@@ -189,7 +192,7 @@ class Yapi():
     
     def spectra(self,T):
         
-        dt=self.dt
+        dt1=self.dt
         pi = np.pi
         m=1             #kg
         ksi=Yapi.dampingRatio(self,0.05)        #ksi
@@ -203,7 +206,7 @@ class Yapi():
         wn=2 * pi * f   #rad/sec
         k=m*wn**2       #N/m
         c=2*ksi*wn*m    #unitless
-        x, v, a = Yapi.newmark(self,m, c, k, dt, p, beta, gamma, x0, v0)
+        x, v, a = Yapi.newmark(self,m, c, k, dt1, p, beta, gamma, x0, v0)
         return max(abs(x)), max(abs(v)), max(abs(a))
     
     def spectra1(self):
