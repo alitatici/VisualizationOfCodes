@@ -135,7 +135,7 @@ class Yapi():
     
     def earthquakeData(self,file_use_quotationmark,dt):
         ag_txt = np.loadtxt(file_use_quotationmark, skiprows=65)
-        groundacc=ag_txt[:]
+        groundacc=ag_txt[:]/980.665
         self.ags=groundacc.flatten("C")
         self.t_amount = len(self.ags)
         # ag_txt = np.loadtxt(file_use_quotationmark, delimiter=delimiter_use_quotationmark, skiprows=65)
@@ -149,7 +149,7 @@ class Yapi():
         self.dt=dt
         t = np.arange(0, self.t_amount*self.dt, self.dt)
         ax.plot(t, self.ags)
-        ax.set_ylabel("Acceleration (cm/sec^2)")
+        ax.set_ylabel("Acceleration (g)")
         ax.set_xlabel("Time(sec)")
         plt.savefig("EarthquakeData.png")
         return
@@ -194,7 +194,7 @@ class Yapi():
         
         dt1=self.dt
         pi = np.pi
-        m=1             #kg
+        m=1             #t
         ksi=Yapi.dampingRatio(self,0.05)        #ksi
         p = -m * self.ags
         x0 = 0
@@ -204,7 +204,7 @@ class Yapi():
         
         f=1/T
         wn=2 * pi * f   #rad/sec
-        k=m*wn**2       #N/m
+        k=m*wn**2       #kN/m
         c=2*ksi*wn*m    #unitless
         x, v, a = Yapi.newmark(self,m, c, k, dt1, p, beta, gamma, x0, v0)
         return max(abs(x)), max(abs(v)), max(abs(a))
@@ -240,16 +240,17 @@ class Yapi():
         ax0.grid(True)
         ax0.legend()
         plt.xlabel("Tn(s)")
-        plt.ylabel("x (cm)")
+        plt.ylabel("x (m)")
         plt.title("Displacement Response Spectrum")
         plt.savefig("PseudoDisplacement.png")
+
         plt.figure()
         plt.plot(np.arange(0.1,4,self.dt),Sa)
         ax0 = plt.gca()
         ax0.grid(True)
         ax0.legend()
         plt.xlabel("Tn(s)")
-        plt.ylabel("A (g)")
+        plt.ylabel("Sae (g)")
         plt.title("Acceleration Response Spectrum")
         plt.savefig("PseudoAcceleration.png")
     
