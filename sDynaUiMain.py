@@ -739,7 +739,7 @@ def word():
                         font.size= Pt(9)
 
         while completed < 58:
-            completed += 1
+            completed += 0.0001
             ui.progressBar.setValue(completed)
 
         #----------MODAL PARTICIPATING FACTOR FOR EACH MODES-----------#
