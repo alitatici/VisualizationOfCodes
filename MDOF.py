@@ -250,7 +250,7 @@ class Yapi():
         ax0.grid(True)
         ax0.legend()
         plt.xlabel("Tn(s)")
-        plt.ylabel("Sae (g)")
+        plt.ylabel("Sa (g)")
         plt.title("Acceleration Response Spectrum")
         plt.savefig("PseudoAcceleration.png")
     
