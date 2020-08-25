@@ -172,7 +172,7 @@ def deleteRow():
                 curs.execute("DELETE FROM sDyna WHERE Floor='%s'"%(dlt))
                 conn.commit()
                 makeList()
-                ui.statusbar.showMessage(str(dlt)+". floor's data has been deleted successfully.",10000) #10000 milisaniye=10 saniye mesaj görünecek.
+                ui.statusbar.showMessage(str(dlt)+". floor's data have been deleted successfully.",10000) #10000 milisaniye=10 saniye mesaj görünecek.
             
             except Exception as Error:
                 ui.statusbar.showMessage("Error:"+str(Error),10000)
